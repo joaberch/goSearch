@@ -3,6 +3,8 @@ package treebuilder
 import (
 	"log"
 	"os"
+	"path/filepath"
+	"strings"
 )
 
 type TreeElement struct {
@@ -12,7 +14,14 @@ type TreeElement struct {
 	Children []TreeElement
 }
 
-func GetFileTree(selected []string) TreeElement {
+type TreeResult struct {
+	Tree       TreeElement
+	ValidFiles []string
+}
+
+func GetFileTree(selected []string) TreeResult {
+	var validFiles []string
+
 	treeRoot := TreeElement{
 		Name:     "root",
 		Path:     "",
@@ -32,21 +41,26 @@ func GetFileTree(selected []string) TreeElement {
 			IsDir: info.IsDir(),
 		}
 		if info.IsDir() {
-			treeElement.Children = recursiveTree(element)
+			children, files := recursiveTree(element)
+			treeElement.Children = children
+			validFiles = append(validFiles, files...) //TODO - understand
+		} else if isValidFile(element) {
+			validFiles = append(validFiles, element)
 		}
 
 		treeRoot.Children = append(treeRoot.Children, treeElement)
 	}
-	return treeRoot
+	return TreeResult{Tree: treeRoot, ValidFiles: validFiles}
 }
 
-func recursiveTree(path string) []TreeElement {
+func recursiveTree(path string) ([]TreeElement, []string) {
 	entries, err := os.ReadDir(path)
 	if err != nil {
 		log.Fatal(err)
 	}
 
 	var children []TreeElement
+	var validFiles []string
 
 	for _, entry := range entries {
 		childPath := path + "\\" + entry.Name()
@@ -58,9 +72,18 @@ func recursiveTree(path string) []TreeElement {
 		}
 
 		if entry.IsDir() {
-			child.Children = recursiveTree(childPath)
+			subChildren, subFiles := recursiveTree(childPath)
+			child.Children = subChildren
+			validFiles = append(validFiles, subFiles...) //TODO - understand
+		} else if isValidFile(childPath) {
+			validFiles = append(validFiles, childPath)
 		}
 		children = append(children, child)
 	}
-	return children
+	return children, validFiles
+}
+
+func isValidFile(path string) bool {
+	extension := strings.ToLower(filepath.Ext(path))
+	return !(extension == ".bin" || extension == ".exe" || extension == ".dll" || extension == ".iso") //TODO - add other and optimise
 }
