@@ -11,9 +11,14 @@ func main() {
 	//Step 1 - Get Files
 	//Step 1.1 - UI Folder selection
 	selected := selectFolder()
+
+	//Step 1.2 Filter file, we don't want to process exe file or dll or iso
 	tree := treebuilder.GetFileTree(selected)
-	fmt.Println(tree)
-	printTree(tree, 0)
+
+	//Debug
+	//fmt.Println(tree.Tree)
+	//printTree(tree.Tree, 0)
+	fmt.Println(tree.ValidFiles)
 
 	//Step 2 - Read file in streaming and normalize content
 	//Step 2.1 - Filter (exe, etc)
