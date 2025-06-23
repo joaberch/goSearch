@@ -2,9 +2,13 @@ package main
 
 import (
 	"Go-LocalSearchEngine/treebuilder"
+	"bufio"
 	"fmt"
 	"github.com/ncruces/zenity"
 	"log"
+	"os"
+	"regexp"
+	"strings"
 )
 
 func main() {
@@ -13,27 +17,88 @@ func main() {
 	selected := selectFolder()
 
 	//Step 1.2 Filter file, we don't want to process exe file or dll or iso
-	tree := treebuilder.GetFileTree(selected)
+	res := treebuilder.GetFileTree(selected)
 
 	//Debug
-	//fmt.Println(tree.Tree)
-	//printTree(tree.Tree, 0)
-	fmt.Println(tree.ValidFiles)
+	//fmt.Println(res.Tree)
+	//printTree(res.Tree, 0)
+	fmt.Println(res.ValidFiles)
 
 	//Step 2 - Read file in streaming and normalize content
-	//Step 2.1 - Filter (exe, etc)
+	//Step 2.1 - Stream and normalize file content
 
-	//Step 2.2 - Stream file content
+	//Normalization guideline :
+	//1 - Everything in lowercase
+	//2 - Remove punctuation
+	//3 - Remove special character
+	//4 - Remove stop words (the, is, and, etc) - not required but surely needed in that application
+	//5 - Stemming
+	//6 - Lemmatization
 
-	//Step 2.3 - Normalize text content
+	for _, file := range res.ValidFiles {
+		toName := stream(file)
+		fmt.Println(toName)
+	}
 
-	//Step 2.4 - Store normalized content (temporarily)
+	//Step 2.2 - Store normalized content (temporarily)
 
 	//Step 3 - Create Inverted index
 	//Step 3.1 - Create XML (Be wary of depth, filter extension like exe to save resources, prevent infinite loop because of symbolic link and display the number of file to index)
 
 	//Step 4 - Save Index
 	//Step 4.1 - Compress XML to store
+}
+
+func stream(path string) []string {
+	//Stream
+	file, err := os.Open(path)
+	if err != nil {
+		log.Fatal(err)
+	}
+	defer file.Close()
+
+	scanner := bufio.NewScanner(file) //Line length CAN be longer than 65536, TODO - see if the Buffer Method is required
+	var tokens []string
+	for scanner.Scan() {
+		line := scanner.Text()
+		normalizedLine := normalize(line)
+		tokens = append(tokens, normalizedLine...)
+	}
+	if err := scanner.Err(); err != nil {
+		log.Fatal(err)
+	}
+
+	fmt.Println(tokens)
+	return tokens
+}
+
+func normalize(line string) []string {
+	//1 - Lowercase
+	line = strings.ToLower(line)
+
+	//2 & 3 - Punctuation & Special character
+	regxp, _ := regexp.Compile(`[^\w\s]`)
+	line = regxp.ReplaceAllString(line, "")
+
+	//Split for each character
+	words := strings.Fields(line)
+
+	stopWords := map[string]bool{
+		"the": true, "is": true, "and": true, "a": true, "to": true, "in": true, "of": true, "their": true, "theirs": true, "de": true,
+	}
+
+	//4 - Remove stop words
+	var filtered []string
+	for _, word := range words {
+		if !stopWords[word] {
+			filtered = append(filtered, word)
+		}
+	}
+
+	//5 - Stemming and Lemmatization
+
+	//fmt.Println(filtered)
+	return filtered
 }
 
 // Debug func
