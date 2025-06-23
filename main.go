@@ -15,8 +15,9 @@ type TreeElement struct {
 }
 
 func main() {
-	selected := selectF()
+	selected := selectFolder()
 	tree := getFileTree(selected)
+	fmt.Println(tree)
 	printTree(tree, 0)
 }
 
@@ -37,7 +38,7 @@ func printTree(tree TreeElement, depth int) {
 	}
 }
 
-func selectF() []string {
+func selectFolder() []string {
 	file, err := zenity.SelectFileMultiple(zenity.Directory())
 	if err != nil {
 		log.Fatal(err)
