@@ -3,8 +3,6 @@ package treebuilder
 import (
 	"log"
 	"os"
-	"path/filepath"
-	"strings"
 )
 
 type TreeElement struct {
@@ -14,14 +12,7 @@ type TreeElement struct {
 	Children []TreeElement
 }
 
-type TreeResult struct {
-	Tree       TreeElement
-	ValidFiles []string
-}
-
-func GetFileTree(selected []string) TreeResult {
-	var validFiles []string
-
+func GetFileTree(selected []string) TreeElement {
 	treeRoot := TreeElement{
 		Name:     "root",
 		Path:     "",
@@ -41,26 +32,21 @@ func GetFileTree(selected []string) TreeResult {
 			IsDir: info.IsDir(),
 		}
 		if info.IsDir() {
-			children, files := recursiveTree(element)
-			treeElement.Children = children
-			validFiles = append(validFiles, files...) //TODO - understand
-		} else if isValidFile(element) {
-			validFiles = append(validFiles, element)
+			treeElement.Children = recursiveTree(element)
 		}
 
 		treeRoot.Children = append(treeRoot.Children, treeElement)
 	}
-	return TreeResult{Tree: treeRoot, ValidFiles: validFiles}
+	return treeRoot
 }
 
-func recursiveTree(path string) ([]TreeElement, []string) {
+func recursiveTree(path string) []TreeElement {
 	entries, err := os.ReadDir(path)
 	if err != nil {
 		log.Fatal(err)
 	}
 
 	var children []TreeElement
-	var validFiles []string
 
 	for _, entry := range entries {
 		childPath := path + "\\" + entry.Name()
@@ -72,18 +58,9 @@ func recursiveTree(path string) ([]TreeElement, []string) {
 		}
 
 		if entry.IsDir() {
-			subChildren, subFiles := recursiveTree(childPath)
-			child.Children = subChildren
-			validFiles = append(validFiles, subFiles...) //TODO - understand
-		} else if isValidFile(childPath) {
-			validFiles = append(validFiles, childPath)
+			child.Children = recursiveTree(childPath)
 		}
 		children = append(children, child)
 	}
-	return children, validFiles
-}
-
-func isValidFile(path string) bool {
-	extension := strings.ToLower(filepath.Ext(path))
-	return !(extension == ".bin" || extension == ".exe" || extension == ".dll" || extension == ".iso") //TODO - add other and optimise
+	return children
 }
