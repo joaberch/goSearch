@@ -14,6 +14,7 @@ func main() {
 	printTree(tree, 0)
 }
 
+// Debug func
 func printTree(tree treebuilder.TreeElement, depth int) {
 	indentation := ""
 	for i := 0; i < depth; i++ {
@@ -31,6 +32,7 @@ func printTree(tree treebuilder.TreeElement, depth int) {
 	}
 }
 
+// Select one or multiple folder
 func selectFolder() []string {
 	file, err := zenity.SelectFileMultiple(zenity.Directory())
 	if err != nil {
