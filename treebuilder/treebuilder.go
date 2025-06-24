@@ -14,12 +14,7 @@ type TreeElement struct {
 	Children []TreeElement
 }
 
-type TreeResult struct {
-	Tree       TreeElement
-	ValidFiles []string
-}
-
-func GetFileTree(selected []string) TreeResult {
+func GetFileTree(selected []string) []string {
 	var validFiles []string
 
 	treeRoot := TreeElement{
@@ -51,7 +46,7 @@ func GetFileTree(selected []string) TreeResult {
 
 		treeRoot.Children = append(treeRoot.Children, treeElement)
 	}
-	return TreeResult{Tree: treeRoot, ValidFiles: validFiles}
+	return validFiles
 }
 
 func isSymlink(path string) bool {

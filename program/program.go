@@ -25,7 +25,7 @@ func Create() {
 	//Step 2 - Read file in streaming and normalize content
 	//Step 2.1 - Stream and normalize file content
 	var filesData []indexer.DataFile
-	for _, file := range res.ValidFiles {
+	for _, file := range res {
 		toName := streamer.Stream(file)                                            //Shortcut are seen as file and not as folder, prevent stackOverflow error
 		filesData = append(filesData, indexer.DataFile{Path: file, Token: toName}) //Step 2.2 - Store normalized content (temporarily)
 	}
