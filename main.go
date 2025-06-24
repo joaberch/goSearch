@@ -6,6 +6,7 @@ import (
 	"Go-LocalSearchEngine/treebuilder"
 	"Go-LocalSearchEngine/uier"
 	"fmt"
+	"log"
 )
 
 func main() {
@@ -27,7 +28,11 @@ func main() {
 	//Step 3 - Create Inverted index
 	invertedIndex := indexer.BuildInvertedIndex(filesData)
 	fmt.Println(invertedIndex)
-	//Step 3.1 - Create XML (Be wary of depth, prevent infinite loop because of symbolic link and display the number of file to index)
+	//Step 3.1 - Create XML (Be wary of depth and display the number of file to index)
+	err := indexer.SaveIndexAsXml(invertedIndex, "index.xml")
+	if err != nil {
+		log.Fatal("Erreur lors de la sauvegarde du fichier XML", err)
+	}
 
 	//Step 4 - Save Index
 	//Step 4.1 - Compress XML to store
