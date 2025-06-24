@@ -84,6 +84,6 @@ func recursiveTree(path string) ([]TreeElement, []string) {
 }
 
 func isValidFile(path string) bool {
-	extension := strings.ToLower(filepath.Ext(path))
-	return !(extension == ".bin" || extension == ".exe" || extension == ".dll" || extension == ".iso") //TODO - add other and optimise
+	e := strings.ToLower(filepath.Ext(path))                                          //e = extension
+	return !(e == ".bin" || e == ".exe" || e == ".dll" || e == ".iso" || e == ".lnk") //TODO - add other and optimize
 }
