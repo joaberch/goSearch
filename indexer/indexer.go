@@ -2,6 +2,7 @@ package indexer
 
 import (
 	"encoding/xml"
+	"io"
 	"log"
 	"os"
 )
@@ -61,4 +62,35 @@ func BuildInvertedIndex(files []DataFile) InvertedIndex {
 		}
 	}
 	return index
+}
+
+func LoadIndexFromXML(path string) (map[string][]string, error) {
+	file, err := os.Open(path)
+	if err != nil {
+		return nil, err
+	}
+	defer func(file *os.File) {
+		err := file.Close()
+		if err != nil {
+			log.Fatal(err)
+		}
+	}(file)
+
+	data, err := io.ReadAll(file)
+	if err != nil {
+		return nil, err
+	}
+
+	var index XMLIndex
+	err = xml.Unmarshal(data, &index)
+	if err != nil {
+		return nil, err
+	}
+
+	result := make(map[string][]string)
+	for _, entry := range index.Entries {
+		result[entry.Word] = entry.Files
+	}
+
+	return result, nil
 }
