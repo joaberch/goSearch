@@ -8,6 +8,11 @@ import (
 	"log"
 )
 
+type dataFile struct {
+	path  string
+	token []string
+}
+
 func main() {
 	//Step 1 - Get Files
 	//Step 1.1 - UI Folder selection
@@ -18,11 +23,11 @@ func main() {
 
 	//Step 2 - Read file in streaming and normalize content
 	//Step 2.1 - Stream and normalize file content
+	var res2 []dataFile
 	for _, file := range res.ValidFiles {
 		toName := streamer.Stream(file)
+		res2 = append(res2, dataFile{path: file, token: toName}) //Step 2.2 - Store normalized content (temporarily)
 	}
-
-	//Step 2.2 - Store normalized content (temporarily)
 
 	//Step 3 - Create Inverted index
 	//Step 3.1 - Create XML (Be wary of depth, filter extension like exe to save resources, prevent infinite loop because of symbolic link and display the number of file to index)
