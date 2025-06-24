@@ -1,16 +1,13 @@
 package main
 
 import (
+	"Go-LocalSearchEngine/compresser"
 	"Go-LocalSearchEngine/indexer"
 	"Go-LocalSearchEngine/streamer"
 	"Go-LocalSearchEngine/treebuilder"
 	"Go-LocalSearchEngine/uier"
-	"bufio"
-	"compress/gzip"
 	"fmt"
-	"io"
 	"log"
-	"os"
 )
 
 func main() {
@@ -40,49 +37,5 @@ func main() {
 
 	//Step 4 - Save Index
 	//Step 4.1 - Compress XML to store
-	compressXMLFile()
-}
-
-func compressXMLFile() {
-	fileSource := "index.xml"
-	fileDestination := "index.xml.gz"
-
-	//Open source file
-	source, err := os.Open(fileSource)
-	if err != nil {
-		log.Fatal(err)
-	}
-	defer func(f *os.File) {
-		err := f.Close()
-		if err != nil {
-			log.Fatal(err)
-		}
-	}(source)
-
-	//Create destination file
-	destination, err := os.Create(fileDestination)
-	if err != nil {
-		log.Fatal(err)
-	}
-	defer func(f *os.File) {
-		err := f.Close()
-		if err != nil {
-			log.Fatal(err)
-		}
-	}(destination)
-
-	//Create writer
-	w := gzip.NewWriter(destination)
-	defer func(w *gzip.Writer) {
-		err := w.Close()
-		if err != nil {
-			log.Fatal(err)
-		}
-	}(w)
-
-	//Copy content
-	_, err = io.Copy(w, bufio.NewReader(source))
-	if err != nil {
-		log.Fatal(err)
-	}
+	compresser.CompressXMLFile()
 }
