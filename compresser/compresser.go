@@ -51,3 +51,10 @@ func CompressXMLFile() {
 		log.Fatal(err)
 	}
 }
+
+func DeleteXML() {
+	err := os.Remove("index.xml")
+	if err != nil {
+		log.Fatal(err)
+	}
+}
