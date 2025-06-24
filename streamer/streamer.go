@@ -8,7 +8,6 @@ import (
 )
 
 func Stream(path string) []string {
-	//Stream
 	file, err := os.Open(path)
 	if err != nil {
 		log.Fatal(err)
@@ -21,6 +20,11 @@ func Stream(path string) []string {
 	}(file)
 
 	scanner := bufio.NewScanner(file) //Line length CAN be longer than 65536, TODO - see if the Buffer Method is required
+	//Upgrade buffer size to 1Mo
+	const maxCapacity = 10 * 1024 * 1024 //100Mo
+	buf := make([]byte, maxCapacity)
+	scanner.Buffer(buf, maxCapacity)
+
 	var tokens []string
 	for scanner.Scan() {
 		line := scanner.Text()
@@ -28,7 +32,7 @@ func Stream(path string) []string {
 		tokens = append(tokens, normalizedLine...)
 	}
 	if err := scanner.Err(); err != nil {
-		log.Fatal(err)
+		log.Fatal(path, "Error :", err)
 	}
 
 	return tokens
