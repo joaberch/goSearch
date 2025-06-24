@@ -17,8 +17,9 @@ func main() {
 	defer compresser.DeleteXML()
 
 	reader := bufio.NewReader(os.Stdin)
+	fmt.Print("Local Search in your file by selecting a Folder!")
 	fmt.Println("1. Select Folder")
-	fmt.Println("2. Use last folder selected")
+	fmt.Println("2. Use last folder selected (if an index already exists)")
 	fmt.Print("Enter your choice: ")
 	input, _ := reader.ReadString('\n')
 	input = strings.TrimSpace(input)
