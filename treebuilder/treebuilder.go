@@ -32,7 +32,8 @@ func GetFileTree(selected []string) TreeResult {
 	for _, element := range selected {
 		info, err := os.Stat(element)
 		if err != nil {
-			log.Fatal(err)
+			log.Println(err)
+			continue
 		}
 
 		treeElement := TreeElement{
@@ -53,10 +54,49 @@ func GetFileTree(selected []string) TreeResult {
 	return TreeResult{Tree: treeRoot, ValidFiles: validFiles}
 }
 
+func isSymlink(path string) bool {
+	info, err := os.Lstat(path)
+	if err != nil {
+		return false
+	}
+	return info.Mode()&os.ModeSymlink != 0
+}
+
+func isExcludedPath(path string) bool {
+	excluded := []string{
+		"Application Data",
+		"$Recycle.Bin",
+		"System Volume Information",
+		"AppData",
+		"px59nyu\\Cookies",
+		"Documents\\Ma musique",
+		"Documents\\Mes images",
+		"Documents\\Mes vidéos",
+		"px59nyu\\Local Settings",
+		"px59nyu\\Menu Démarrer",
+		"px59nyu\\Mes documents",
+		"px59nyu\\Modèles",
+		"px59nyu\\NTUSER.DAT",
+		"OneDrive - Education Vaud",
+		"px59nyu\\Recent",
+		"px59nyu\\SendTo",
+		"px59nyu\\Voisinage d'impression",
+		"px59nyu\\Voisinage réseau",
+	}
+	path = strings.ToLower(path)
+	for _, ex := range excluded {
+		if strings.Contains(path, strings.ToLower(ex)) {
+			return true
+		}
+	}
+	return false
+}
+
 func recursiveTree(path string) ([]TreeElement, []string) {
 	entries, err := os.ReadDir(path)
 	if err != nil {
-		log.Fatal(err)
+		log.Printf("Impossible d'accéder à %s : %v", path, err) //If it requires admin right we just stop
+		return []TreeElement{}, []string{}
 	}
 
 	var children []TreeElement
@@ -64,6 +104,11 @@ func recursiveTree(path string) ([]TreeElement, []string) {
 
 	for _, entry := range entries {
 		childPath := path + "\\" + entry.Name()
+
+		if isExcludedPath(childPath) || isSymlink(childPath) {
+			log.Printf("%s est exclu ou symlink", childPath)
+			continue
+		}
 
 		child := TreeElement{
 			Name:  entry.Name(),
@@ -84,6 +129,7 @@ func recursiveTree(path string) ([]TreeElement, []string) {
 }
 
 func isValidFile(path string) bool {
-	e := strings.ToLower(filepath.Ext(path))                                          //e = extension
-	return !(e == ".bin" || e == ".exe" || e == ".dll" || e == ".iso" || e == ".lnk") //TODO - add other and optimize
+	e := strings.ToLower(filepath.Ext(path)) //e = extension
+	return !(e == ".bin" || e == ".exe" || e == ".dll" || e == ".iso" || e == ".lnk" || e == ".mp4" || e == ".zip" || e == ".ttf" || e == ".otf" ||
+		e == ".png" || e == ".otb" || e == ".cff" || e == ".ttc" || e == ".base64" || e == ".syso") //TODO - add other and optimize
 }
