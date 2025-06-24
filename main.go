@@ -23,10 +23,10 @@ func main() {
 
 	//Step 2 - Read file in streaming and normalize content
 	//Step 2.1 - Stream and normalize file content
-	var res2 []dataFile
+	var filesData []dataFile
 	for _, file := range res.ValidFiles {
 		toName := streamer.Stream(file)
-		res2 = append(res2, dataFile{path: file, token: toName}) //Step 2.2 - Store normalized content (temporarily)
+		filesData = append(filesData, dataFile{path: file, token: toName}) //Step 2.2 - Store normalized content (temporarily)
 	}
 
 	//Step 3 - Create Inverted index
