@@ -14,6 +14,14 @@ import (
 )
 
 func main() {
+	//Delete basic XML file when the program is stopped, the file can be > 1Go so we only keep the .gz
+	defer func(name string) {
+		err := os.Remove(name)
+		if err != nil {
+			log.Fatal(err)
+		}
+	}("index.xml")
+
 	//Step 1 - Get Files
 	//Step 1.1 - UI Folder selection
 	selected := uier.SelectFolder()

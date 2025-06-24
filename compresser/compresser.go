@@ -50,10 +50,4 @@ func CompressXMLFile() {
 	if err != nil {
 		log.Fatal(err)
 	}
-
-	//Delete basic XML file
-	//err = os.Remove(fileSource)
-	//if err != nil {
-	//	log.Fatal(err)
-	//}
 }
