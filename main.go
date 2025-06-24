@@ -4,15 +4,14 @@ import (
 	"Go-LocalSearchEngine/indexer"
 	"Go-LocalSearchEngine/streamer"
 	"Go-LocalSearchEngine/treebuilder"
+	"Go-LocalSearchEngine/uier"
 	"fmt"
-	"github.com/ncruces/zenity"
-	"log"
 )
 
 func main() {
 	//Step 1 - Get Files
 	//Step 1.1 - UI Folder selection
-	selected := selectFolder()
+	selected := uier.SelectFolder()
 
 	//Step 1.2 Filter file, we don't want to process exe file or dll or iso
 	res := treebuilder.GetFileTree(selected)
@@ -32,32 +31,4 @@ func main() {
 
 	//Step 4 - Save Index
 	//Step 4.1 - Compress XML to store
-}
-
-// Debug func
-func printTree(tree treebuilder.TreeElement, depth int) {
-	indentation := ""
-	for i := 0; i < depth; i++ {
-		indentation += " "
-	}
-
-	if tree.IsDir {
-		fmt.Printf("%s📁 %s\n", indentation, tree.Name)
-	} else {
-		fmt.Printf("%s📄 %s\n", indentation, tree.Name)
-	}
-
-	for _, child := range tree.Children {
-		printTree(child, depth+1)
-	}
-}
-
-// Select one or multiple folder
-func selectFolder() []string {
-	file, err := zenity.SelectFileMultiple(zenity.Directory())
-	if err != nil {
-		log.Fatal(err)
-	}
-	fmt.Println("Emplacement racine : ", file)
-	return file
 }
