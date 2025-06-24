@@ -39,5 +39,5 @@ func Create() {
 
 	//Step 4 - Save Index
 	//Step 4.1 - Compress XML to store
-	compresser.CompressXMLFile() //To Save, currently not required TODO - UI enable to choose if we want to select folder or just research in a pre-existent one
+	compresser.CompressXMLFile()
 }

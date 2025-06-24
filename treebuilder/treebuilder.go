@@ -1,8 +1,10 @@
 package treebuilder
 
 import (
+	"fmt"
 	"log"
 	"os"
+	"os/user"
 	"path/filepath"
 	"strings"
 )
@@ -39,7 +41,7 @@ func GetFileTree(selected []string) []string {
 		if info.IsDir() {
 			children, files := recursiveTree(element)
 			treeElement.Children = children
-			validFiles = append(validFiles, files...) //TODO - understand
+			validFiles = append(validFiles, files...)
 		} else if isValidFile(element) {
 			validFiles = append(validFiles, element)
 		}
@@ -58,6 +60,11 @@ func isSymlink(path string) bool {
 }
 
 func isExcludedPath(path string) bool {
+	currentUser, err := user.Current()
+	if err != nil {
+		return false
+	}
+
 	excluded := []string{
 		"Application Data",
 		"$Recycle.Bin",
@@ -101,7 +108,7 @@ func recursiveTree(path string) ([]TreeElement, []string) {
 		childPath := path + "\\" + entry.Name()
 
 		if isExcludedPath(childPath) || isSymlink(childPath) {
-			log.Printf("%s est exclu ou symlink", childPath)
+			//log.Printf("%s est exclu ou symlink", childPath)
 			continue
 		}
 
@@ -114,7 +121,7 @@ func recursiveTree(path string) ([]TreeElement, []string) {
 		if entry.IsDir() {
 			subChildren, subFiles := recursiveTree(childPath)
 			child.Children = subChildren
-			validFiles = append(validFiles, subFiles...) //TODO - understand
+			validFiles = append(validFiles, subFiles...)
 		} else if isValidFile(childPath) {
 			validFiles = append(validFiles, childPath)
 		}
@@ -126,5 +133,5 @@ func recursiveTree(path string) ([]TreeElement, []string) {
 func isValidFile(path string) bool {
 	e := strings.ToLower(filepath.Ext(path)) //e = extension
 	return !(e == ".bin" || e == ".exe" || e == ".dll" || e == ".iso" || e == ".lnk" || e == ".mp4" || e == ".zip" || e == ".ttf" || e == ".otf" ||
-		e == ".png" || e == ".otb" || e == ".cff" || e == ".ttc" || e == ".base64" || e == ".syso") //TODO - add other and optimize
+		e == ".png" || e == ".otb" || e == ".cff" || e == ".ttc" || e == ".base64" || e == ".syso")
 }
