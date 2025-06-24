@@ -19,9 +19,9 @@ func Stream(path string) []string {
 		}
 	}(file)
 
-	scanner := bufio.NewScanner(file) //Line length CAN be longer than 65536, TODO - see if the Buffer Method is required
+	scanner := bufio.NewScanner(file) //Line length CAN be longer than 65536, determine max capacity at 10Mo
 	//Upgrade buffer size to 1Mo
-	const maxCapacity = 10 * 1024 * 1024 //100Mo
+	const maxCapacity = 10 * 1024 * 1024 //10Mo
 	buf := make([]byte, maxCapacity)
 	scanner.Buffer(buf, maxCapacity)
 
