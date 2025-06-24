@@ -6,8 +6,11 @@ import (
 	"Go-LocalSearchEngine/streamer"
 	"Go-LocalSearchEngine/treebuilder"
 	"Go-LocalSearchEngine/uier"
+	"bufio"
 	"fmt"
 	"log"
+	"os"
+	"strings"
 )
 
 func main() {
@@ -37,5 +40,42 @@ func main() {
 
 	//Step 4 - Save Index
 	//Step 4.1 - Compress XML to store
-	compresser.CompressXMLFile()
+	compresser.CompressXMLFile() //To Save, currently not required TODO - UI enable to choose if we want to select folder or just research in a pre-existent one
+
+	//Step 5 - Create UI to search word (check if match, not if fully equals)
+
+	//Step 5.1 - Create UI
+	index, err := indexer.LoadIndexFromXML("index.xml")
+	if err != nil {
+		log.Fatal(err)
+	}
+
+	reader := bufio.NewReader(os.Stdin)
+	for {
+		fmt.Println("Entrez un mot à rechercher (ou 'exit' pour quitter) :")
+		fmt.Print("> ")
+		query, _ := reader.ReadString('\n')
+		query = strings.TrimSpace(query)
+
+		if query == "exit" {
+			break
+		}
+
+		found := false
+		for token, files := range index {
+			if strings.Contains(token, query) {
+				found = true
+				fmt.Printf("'%s' trouvé dans le/les fichiers :\n", token)
+				for _, file := range files {
+					fmt.Println(" -", file)
+				}
+			}
+		}
+
+		if !found {
+			fmt.Printf("Aucun fichier trouvé pour la recherche %s\n", query)
+		}
+	}
+
+	//Step 5.3 -
 }
