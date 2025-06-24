@@ -28,5 +28,5 @@ Make a research of this word in the index this is an inverted index, each word f
     <file>C:\Users\px59nyu\Desktop\temp\goTest1\Nouveau Document texte (2).txt</file>
     <file>C:\Users\px59nyu\Desktop\temp\goTest1\Nouveau Document texte.txt</file>
     <file>C:\Users\px59nyu\Desktop\temp\goTest2\Nouveau Document texte.txt</file>
-  </entry>
+</entry>
 ```
