@@ -19,11 +19,6 @@ func main() {
 	//Step 1.2 Filter file, we don't want to process exe file or dll or iso
 	res := treebuilder.GetFileTree(selected)
 
-	//Debug
-	//fmt.Println(res.Tree)
-	//printTree(res.Tree, 0)
-	fmt.Println(res.ValidFiles)
-
 	//Step 2 - Read file in streaming and normalize content
 	//Step 2.1 - Stream and normalize file content
 
@@ -68,7 +63,6 @@ func stream(path string) []string {
 		log.Fatal(err)
 	}
 
-	fmt.Println(tokens)
 	return tokens
 }
 
@@ -97,7 +91,6 @@ func normalize(line string) []string {
 
 	//5 - Stemming and Lemmatization
 
-	//fmt.Println(filtered)
 	return filtered
 }
 
@@ -125,6 +118,6 @@ func selectFolder() []string {
 	if err != nil {
 		log.Fatal(err)
 	}
-	fmt.Println("Emplacement : ", file)
+	fmt.Println("Emplacement racine : ", file)
 	return file
 }
