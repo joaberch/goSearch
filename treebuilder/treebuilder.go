@@ -132,5 +132,5 @@ func recursiveTree(path string) ([]TreeElement, []string) {
 func isValidFile(path string) bool {
 	e := strings.ToLower(filepath.Ext(path)) //e = extension
 	return !(e == ".bin" || e == ".exe" || e == ".dll" || e == ".iso" || e == ".lnk" || e == ".mp4" || e == ".zip" || e == ".ttf" || e == ".otf" ||
-		e == ".png" || e == ".otb" || e == ".cff" || e == ".ttc" || e == ".base64" || e == ".syso")
+		e == ".png" || e == ".otb" || e == ".cff" || e == ".ttc" || e == ".base64" || e == ".syso" || e == ".pdf")
 }
