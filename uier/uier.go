@@ -31,6 +31,5 @@ func SelectFolder() []string {
 	if err != nil {
 		log.Fatal(err)
 	}
-	fmt.Println("Emplacement racine : ", file)
 	return file
 }
