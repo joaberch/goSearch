@@ -70,6 +70,7 @@ func isExcludedPath(path string) bool {
 		"$Recycle.Bin",
 		"System Volume Information",
 		"AppData",
+		"node_modules\\",
 		fmt.Sprintf("%s\\Cookies", currentUser.HomeDir),
 		fmt.Sprintf("%s\\Documents\\Ma musique", currentUser.HomeDir),
 		fmt.Sprintf("%s\\Documents\\Mes images", currentUser.HomeDir),
