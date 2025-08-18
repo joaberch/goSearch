@@ -14,6 +14,8 @@ func main() {
 		return
 	}
 
+	path := os.Args[2]
+
 	switch userCommand {
 	case cmd.CmdShowVersion:
 		cmd.ShowVersion()
@@ -25,7 +27,7 @@ func main() {
 		cmd.DisplayTree()
 		break
 	case cmd.CmdIndexate:
-		cmd.Indexate()
+		cmd.Indexate(path)
 		break
 	default:
 		cmd.ShowHelp()
