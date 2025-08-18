@@ -8,6 +8,6 @@ func ShowHelp() {
 	fmt.Printf("\tversion\tdisplay the version")
 	fmt.Printf("\thelp\tdisplay this help")
 	fmt.Printf("\tsearch [arg]\tsearch the argument in the index")
-	fmt.Printf("\tindexate\tcreate an index from the path given")
+	fmt.Printf("\tindexate\tcreate an index from the relative path given (-a for absolute path | -ui for UI window)")
 	fmt.Printf("\tdisplay\tdisplay the structure of the file indexed")
 }
