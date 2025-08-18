@@ -1,7 +1,6 @@
 package cmd
 
 import (
-	"fmt"
 	"log"
 	"os"
 	"path/filepath"
@@ -23,5 +22,7 @@ func Indexate(path string) {
 		}
 		pathSelected = dir + "\\" + path
 	}
-	fmt.Println(pathSelected)
+
+	//Step 2 - create file tree and filter it
+	utils.CreateFileTree(pathSelected)
 }
