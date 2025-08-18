@@ -1,15 +1,13 @@
 package utils
 
-import (
-	"github.com/ncruces/zenity"
-	"log"
-)
+import "github.com/ncruces/zenity"
 
-// UISelectFolder Select one or multiple folder
-func UISelectFolder() string {
+// UISelectFolder opens a directory picker and returns the selected path.
+// It returns a non-nil error if the user cancels the dialog or if an error occurs.
+func UISelectFolder() (string, error) {
 	file, err := zenity.SelectFile(zenity.Directory())
 	if err != nil {
-		log.Fatal(err)
+		return "", err
 	}
-	return file
+	return file, nil
 }
