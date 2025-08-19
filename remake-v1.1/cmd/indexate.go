@@ -38,4 +38,7 @@ func Indexate(path string) {
 
 	//Step 4 - Save result in inverted index var
 	invIndex := utils.CreateIndex(contents)
+
+	//Step 5 - Save result in XML - TODO: user choose other file type? (json, etc)
+	utils.CreateXML(invIndex)
 }
