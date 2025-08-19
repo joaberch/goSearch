@@ -5,6 +5,7 @@ import (
 	"log"
 	"os"
 	"path/filepath"
+	"search/internal/model"
 	"search/utils"
 )
 
@@ -24,7 +25,14 @@ func Indexate(path string) {
 		pathSelected = dir + "\\" + path
 	}
 
-	//Step 2 - create file tree and filter it
+	//Step 2 - create file tree and filter it (filter is inside CreateFileTree)
 	tree := utils.CreateFileTree(pathSelected)
 	fmt.Println(tree)
+
+	//Step 3 - Stream files (and normalize in *INSERT METHOD NAME*)
+	var contents []model.FileData
+	for _, file := range tree.Children {
+		streamRes := utils.StreamFile(file)
+		contents = append(contents, streamRes)
+	}
 }
