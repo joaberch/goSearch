@@ -5,7 +5,7 @@ import (
 	"strings"
 )
 
-func CheckValidity(entry model.TreeElement) bool {
+func CheckTreeValidity(entry model.TreeElement) bool {
 	if entry.IsDir {
 		//TODO : choose which directory not process
 	} else {

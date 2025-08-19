@@ -29,7 +29,7 @@ func Indexate(path string) {
 	tree := utils.CreateFileTree(pathSelected)
 	fmt.Println(tree)
 
-	//Step 3 - Stream files (and normalize in *INSERT METHOD NAME*)
+	//Step 3 - Stream files (and normalize it in StreamFile)
 	var contents []model.FileData
 	for _, file := range tree.Children {
 		streamRes := utils.StreamFile(file)

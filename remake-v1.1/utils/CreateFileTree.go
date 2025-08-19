@@ -35,7 +35,7 @@ func CreateFileTree(path string) model.TreeElement {
 			IsDir: entry.IsDir(),
 		}
 
-		if !CheckValidity(element) {
+		if !CheckTreeValidity(element) {
 			continue
 		}
 
