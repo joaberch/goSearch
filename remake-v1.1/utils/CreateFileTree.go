@@ -29,6 +29,16 @@ func CreateFileTree(path string) model.TreeElement {
 			log.Fatal(err)
 		}
 
+		element := model.TreeElement{
+			Name:  info.Name(),
+			Path:  fullPath,
+			IsDir: entry.IsDir(),
+		}
+
+		if !CheckValidity(element) {
+			continue
+		}
+
 		if entry.IsDir() {
 			child := CreateFileTree(fullPath)
 			treeRoot.Children = append(treeRoot.Children, &child)

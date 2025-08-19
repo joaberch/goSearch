@@ -1,6 +1,7 @@
 package cmd
 
 import (
+	"fmt"
 	"log"
 	"os"
 	"path/filepath"
@@ -24,5 +25,6 @@ func Indexate(path string) {
 	}
 
 	//Step 2 - create file tree and filter it
-	utils.CreateFileTree(pathSelected)
+	tree := utils.CreateFileTree(pathSelected)
+	fmt.Println(tree)
 }
