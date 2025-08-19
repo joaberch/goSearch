@@ -35,4 +35,7 @@ func Indexate(path string) {
 		streamRes := utils.StreamFile(file)
 		contents = append(contents, streamRes)
 	}
+
+	//Step 4 - Save result in inverted index var
+	invIndex := utils.CreateIndex(contents)
 }
