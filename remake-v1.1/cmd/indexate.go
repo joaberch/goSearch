@@ -26,7 +26,7 @@ func Indexate(path string) {
 	}
 
 	//Step 2 - create file tree and filter it (filter is inside CreateFileTree)
-	tree := utils.CreateFileTree(pathSelected)
+	tree := utils.CreateFileTree(pathSelected) //TODO: Check shortcut to prevent stack overflow - I think it's seen as a file, to check
 	fmt.Println(tree)
 
 	//Step 3 - Stream files (and normalize it in StreamFile)
@@ -40,5 +40,8 @@ func Indexate(path string) {
 	invIndex := utils.CreateIndex(contents)
 
 	//Step 5 - Save result in XML - TODO: user choose other file type? (json, etc)
-	utils.CreateXML(invIndex)
+	utils.CreateXML(invIndex, "index.xml")
+
+	//Step 6 - Compress the XML file to store it
+
 }
