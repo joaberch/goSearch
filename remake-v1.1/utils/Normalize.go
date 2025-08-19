@@ -19,8 +19,8 @@ func Normalize(line string) string {
 	line = strings.ToLower(line)
 
 	//Step 2 & 3 - Remove punctuation and special character
-	regexp, _ := regexp.Compile(`[^\w\s]`)
-	line = regexp.ReplaceAllString(line, "")
+	myRegexp, _ := regexp.Compile(`[^\w\s]`)
+	line = myRegexp.ReplaceAllString(line, "")
 
 	//Array with each word to remove useless one
 	words := strings.Fields(line)
