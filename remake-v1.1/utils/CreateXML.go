@@ -6,10 +6,10 @@ import (
 	"search/internal/model"
 )
 
-// CreateXML creates an XML stocking the inverted index in a harcoded location - TODO: user choose/specific location
+// CreateXML creates an XML stocking the inverted index in a hardcoded location - TODO: user choose/specific location
 func CreateXML(InvertedIndex model.InvertedIndex, path string) {
 	//Step 1 - Create file
-	file, err := os.Create(path) //Currently create the index at the same location - TODO: name index from path
+	file, err := os.Create(path + ".xml") //Currently create the index at the same location - TODO: name index from path
 	if err != nil {
 		panic(err)
 	}

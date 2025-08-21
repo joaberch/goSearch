@@ -40,8 +40,8 @@ func Indexate(path string) {
 	invIndex := utils.CreateIndex(contents)
 
 	//Step 5 - Save result in XML - TODO: user choose other file type? (json, etc)
-	utils.CreateXML(invIndex, "index.xml")
+	utils.CreateXML(invIndex, "index")
 
 	//Step 6 - Compress the XML file to store it
-
+	utils.CompressFile(pathSelected, "index.xml")
 }
