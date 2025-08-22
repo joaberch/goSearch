@@ -44,8 +44,8 @@ func Indexate(path string) {
 	fmt.Println()
 
 	//Step 5 - Save result in XML - TODO: user choose other file type? (json, etc)
-	utils.CreateXML(invIndex, name)
+	utils.CreateXML(invIndex, "index") //There's only one active index so its name can be index.xml, we define a name for the .gz
 
 	//Step 6 - Compress the XML file to store it
-	utils.CompressFile(pathSelected + "\\" + name + ".xml")
+	utils.CompressFile(name)
 }

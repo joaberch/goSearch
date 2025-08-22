@@ -11,7 +11,7 @@ import (
 func CompressFile(path string) {
 
 	//Step 1 - Open source file
-	source, err := os.Open(path)
+	source, err := os.Open("index.xml")
 	if err != nil {
 		panic(err)
 	}
@@ -22,7 +22,7 @@ func CompressFile(path string) {
 		}
 	}(source)
 
-	//Step 2 - Create output file
+	//Step 2 - Create output file TODO: define a storage location path
 	dest, err := os.Create(path + ".gz")
 	if err != nil {
 		panic(err)
