@@ -5,6 +5,7 @@ import (
 	"fmt"
 	"io"
 	"os"
+	"strings"
 )
 
 func Search(word string) {
@@ -40,7 +41,7 @@ func Search(word string) {
 			if t.Name.Local == "entry" { //if is an entry
 				hasFound = false              //reset foreach entry
 				for _, attr := range t.Attr { //foreach attribute
-					if attr.Value == word { //if the attribute is the word we are looking for - TODO: if contains
+					if strings.Contains(attr.Value, word) { //if the attribute is the word we are looking for - TODO: if contains
 						hasFound = true
 					}
 				}
