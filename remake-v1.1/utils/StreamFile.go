@@ -2,6 +2,7 @@ package utils
 
 import (
 	"bufio"
+	"log"
 	"os"
 	"search/internal/model"
 	"strings"
@@ -14,7 +15,8 @@ func StreamFile(element *model.TreeElement) model.FileData {
 
 	file, err := os.Open(newFile.Path)
 	if err != nil {
-		panic(err)
+		log.Printf("Error opening file %s : %v", newFile.Path, err)
+		return newFile
 	}
 	defer func(file *os.File) {
 		err := file.Close()

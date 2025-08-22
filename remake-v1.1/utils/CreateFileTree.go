@@ -18,7 +18,8 @@ func CreateFileTree(path string) model.TreeElement {
 
 	var entries, err = os.ReadDir(path)
 	if err != nil {
-		log.Fatal(err)
+		log.Printf("Error reading directory %s: %s", path, err)
+		return treeRoot
 	}
 
 	for _, entry := range entries {
@@ -26,7 +27,8 @@ func CreateFileTree(path string) model.TreeElement {
 
 		info, err := entry.Info()
 		if err != nil {
-			log.Fatal(err)
+			log.Printf("Error reading directory %s: %s", path, err)
+			return treeRoot
 		}
 
 		element := model.TreeElement{
