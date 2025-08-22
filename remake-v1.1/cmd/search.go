@@ -5,18 +5,16 @@ import (
 	"fmt"
 	"io"
 	"os"
-	"strings"
+	"search/utils"
 )
 
+// Search return result of word in inverted index - TODO: can surely clean code more
 func Search(word string) {
 	var files []string
 	hasFound := false
 
 	//Step 1 - Open source file
-	source, err := os.Open("index.xml")
-	if err != nil {
-		panic(err)
-	}
+	decoder, source, _ := utils.OpenXMLFile("index.xml")
 	defer func(source *os.File) {
 		err := source.Close()
 		if err != nil {
@@ -25,8 +23,6 @@ func Search(word string) {
 	}(source)
 
 	//Step 2 - Parse file to find word
-	decoder := xml.NewDecoder(source)
-
 	for { //infinite loop
 		t, err := decoder.Token() //parse line by line
 		if err == io.EOF {        //If eof we exit the infinite loop
@@ -39,12 +35,7 @@ func Search(word string) {
 		switch t := t.(type) {
 		case xml.StartElement:
 			if t.Name.Local == "entry" { //if is an entry
-				hasFound = false              //reset foreach entry
-				for _, attr := range t.Attr { //foreach attribute
-					if strings.Contains(attr.Value, word) { //if the attribute is the word we are looking for - TODO: if contains
-						hasFound = true
-					}
-				}
+				hasFound = utils.MatchEntry(t, word)
 			} else if hasFound && t.Name.Local == "file" { //if we find the word
 				var path string
 				err := decoder.DecodeElement(&path, &t) //read all content from files
@@ -55,6 +46,7 @@ func Search(word string) {
 			}
 		}
 	}
+
 	fmt.Printf("Found %d file(s) :\n\n", len(files))
 	for _, file := range files {
 		fmt.Println(file)
