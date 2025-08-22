@@ -4,6 +4,7 @@ import (
 	"bufio"
 	"os"
 	"search/internal/model"
+	"strings"
 )
 
 func StreamFile(element *model.TreeElement) model.FileData {
@@ -30,7 +31,10 @@ func StreamFile(element *model.TreeElement) model.FileData {
 	var contents []string
 	for scanner.Scan() {
 		line := Normalize(scanner.Text()) //Normalize line
-		contents = append(contents, line)
+		words := strings.Split(line, ";")
+		for _, word := range words {
+			contents = append(contents, strings.TrimSpace(word))
+		}
 	}
 	newFile.Content = contents
 	return newFile
