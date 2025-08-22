@@ -34,7 +34,7 @@ func Indexate(path string) {
 
 	//Step 3 - Stream files (and normalize it in StreamFile)
 	var contents []model.FileData
-	for _, file := range tree.Children {
+	for _, file := range utils.FlattenTree(&tree) {
 		streamRes := utils.StreamFile(file)
 		contents = append(contents, streamRes)
 	}
