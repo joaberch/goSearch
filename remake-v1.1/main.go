@@ -22,9 +22,6 @@ func main() {
 		word := os.Args[1]
 		cmd.Search(word)
 		break
-	case cmd.CmdDisplayTree:
-		cmd.DisplayTree()
-		break
 	case cmd.CmdIndexate:
 		path := os.Args[2]
 		cmd.Indexate(path)
