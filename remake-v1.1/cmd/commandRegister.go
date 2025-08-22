@@ -6,10 +6,8 @@ var ErrUnknownCommand = errors.New("unknown command")
 
 // CommandsMap is a mapping of command names to their corresponding command types, defining available commands for lookup.
 var CommandsMap = map[string]Type{
-	"help":    CmdShowHelp,
-	"version": CmdShowVersion,
-	//"search":   CmdSearch,
-	"display":  CmdDisplayTree,
+	"help":     CmdShowHelp,
+	"version":  CmdShowVersion,
 	"indexate": CmdIndexate,
 }
 
@@ -18,6 +16,5 @@ func GetCommandType(name string) (Type, error) {
 	if cmdType, found := CommandsMap[name]; found {
 		return cmdType, nil
 	}
-	//return -1, ErrUnknownCommand
 	return CmdSearch, nil
 }
