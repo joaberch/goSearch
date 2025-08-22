@@ -8,9 +8,10 @@ import (
 )
 
 // CompressFile compress the file given with its path and its name
-func CompressFile(path string, name string) {
+func CompressFile(path string) {
+
 	//Step 1 - Open source file
-	source, err := os.Open(path + "\\" + name)
+	source, err := os.Open(path)
 	if err != nil {
 		panic(err)
 	}
