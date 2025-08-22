@@ -27,4 +27,6 @@ var InvalidExtensions = map[string]bool{
 	".pptx":   false,
 	".xlsx":   false,
 	".xls":    false,
+	".LOG1":   false,
+	".LOG2":   false,
 }
