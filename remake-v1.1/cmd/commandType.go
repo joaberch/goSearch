@@ -6,5 +6,4 @@ const (
 	CmdShowHelp Type = iota
 	CmdShowVersion
 	CmdSearch
-	CmdIndexate
 )

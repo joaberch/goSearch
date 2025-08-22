@@ -1,54 +1,33 @@
 package cmd
 
 import (
-	"encoding/xml"
 	"fmt"
-	"io"
 	"os"
 	"search/utils"
+	"strings"
 )
 
 // Search return result of word in inverted index - TODO: can surely clean code more
 func Search(word string) {
-	var files []string
-	hasFound := false
+	//Step 1 - Indexate current path
+	path, err := os.Getwd()
+	if err != nil {
+		panic(err)
+	}
+	fmt.Println("Indexing current directory...")
+	index := utils.Indexate(path)
 
-	//Step 1 - Open source file
-	decoder, source, _ := utils.OpenXMLFile("index.xml")
-	defer func(source *os.File) {
-		err := source.Close()
-		if err != nil {
-			panic(err)
-		}
-	}(source)
-
-	//Step 2 - Parse file to find word
-	for { //infinite loop
-		t, err := decoder.Token() //parse line by line
-		if err == io.EOF {        //If eof we exit the infinite loop
-			break
-		}
-		if err != nil {
-			panic(err)
-		}
-
-		switch t := t.(type) {
-		case xml.StartElement:
-			if t.Name.Local == "entry" { //if is an entry
-				hasFound = utils.MatchEntry(t, word)
-			} else if hasFound && t.Name.Local == "file" { //if we find the word
-				var path string
-				err := decoder.DecodeElement(&path, &t) //read all content from files
-				if err != nil {
-					panic(err)
-				}
-				files = append(files, path)
-			}
+	//Step 2 - Search in index
+	var results []string
+	for key, paths := range index {
+		if strings.Contains(strings.ToLower(key), strings.ToLower(word)) {
+			results = append(results, paths...)
 		}
 	}
 
-	fmt.Printf("Found %d file(s) :\n\n", len(files))
-	for _, file := range files {
-		fmt.Println(file)
+	// Step 3 - Display results
+	fmt.Printf("Found %d file(s) for \"%s\":\n\n", len(results), word)
+	for _, result := range results {
+		fmt.Println(result)
 	}
 }

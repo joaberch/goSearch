@@ -7,8 +7,8 @@ import (
 	"search/internal/model"
 )
 
+// CreateFileTree recursively return the tree structure
 func CreateFileTree(path string) model.TreeElement {
-	//Get each children
 	treeRoot := model.TreeElement{
 		Name:     filepath.Base(path),
 		Path:     path,

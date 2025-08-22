@@ -22,10 +22,6 @@ func main() {
 		word := os.Args[1]
 		cmd.Search(word)
 		break
-	case cmd.CmdIndexate:
-		path := os.Args[2]
-		cmd.Indexate(path)
-		break
 	default:
 		cmd.ShowHelp()
 	}
