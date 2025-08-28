@@ -1,6 +1,6 @@
 package utils
 
-import "search/internal/model"
+import "goSearch/internal/model"
 
 func CheckWordValidity(word string) bool { //AI generated
 	if isInvalid, exists := model.InvalidWord[word]; exists {

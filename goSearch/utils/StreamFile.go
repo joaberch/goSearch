@@ -2,9 +2,9 @@ package utils
 
 import (
 	"bufio"
+	"goSearch/internal/model"
 	"log"
 	"os"
-	"search/internal/model"
 	"strings"
 )
 

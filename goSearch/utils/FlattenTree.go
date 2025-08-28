@@ -1,6 +1,6 @@
 package utils
 
-import "search/internal/model"
+import "goSearch/internal/model"
 
 func FlattenTree(tree *model.TreeElement) []*model.TreeElement {
 	var files []*model.TreeElement

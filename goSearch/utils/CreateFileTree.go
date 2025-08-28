@@ -1,10 +1,10 @@
 package utils
 
 import (
+	"goSearch/internal/model"
 	"log"
 	"os"
 	"path/filepath"
-	"search/internal/model"
 )
 
 // CreateFileTree recursively return the tree structure

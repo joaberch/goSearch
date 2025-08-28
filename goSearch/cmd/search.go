@@ -2,8 +2,8 @@ package cmd
 
 import (
 	"fmt"
+	"goSearch/utils"
 	"os"
-	"search/utils"
 	"strings"
 )
 

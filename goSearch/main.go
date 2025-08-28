@@ -2,8 +2,8 @@ package main
 
 import (
 	"fmt"
+	"goSearch/cmd"
 	"os"
-	"search/cmd"
 )
 
 func main() {

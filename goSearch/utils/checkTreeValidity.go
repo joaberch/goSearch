@@ -1,7 +1,7 @@
 package utils
 
 import (
-	"search/internal/model"
+	"goSearch/internal/model"
 	"strings"
 )
 
