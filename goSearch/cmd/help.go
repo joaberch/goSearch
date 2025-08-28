@@ -5,7 +5,7 @@ import "fmt"
 func ShowHelp() {
 	fmt.Printf("Usage:\n\tcmd <command> [<args>]\n\n")
 	fmt.Printf("The commands are:\n")
-	fmt.Printf("\tversion\tdisplay the version")
-	fmt.Printf("\thelp\tdisplay this help")
-	fmt.Printf("\tsearch [arg]\tsearch the argument in the index")
+	fmt.Printf("\tversion\t\tdisplay the version\n")
+	fmt.Printf("\thelp\t\tdisplay this help\n")
+	fmt.Printf("\t<word>\t\tsearch the word in the index generated from current position\n")
 }
