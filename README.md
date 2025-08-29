@@ -5,22 +5,24 @@ A lightweight CLI search engine built in Go. Search words across files (recursiv
 ```
 git clone https://github.com/joaberch/Go-LocalSearchEngine.git
 ```
-2. Build the project (a batch will do it in the near futur
+2.   Start the setup batch with admin right, in case you don't want to or can't you can manually :
+2.1  Build the project
 ```
 go build
 ```
-3. Add the exe to the system path to use it everywhere (a batch will do it in the near futur)
-4. Enjoy!
+2.2  Add the exe to the system path to use it everywhere
 
 ## Example
 Display the help :
 ```
-gosearch help
+gosearch -h
+gosearch --help
 ```
 
 Display the CLI version :
 ```
-gosearch version
+gosearch -v
+gosearch --version
 ```
 
 Search any word :
