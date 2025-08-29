@@ -26,7 +26,7 @@ func Search(word string) {
 	}
 
 	// Step 3 - Display results
-	fmt.Printf("Found %d file(s) for \"%s\":\n\n", len(results), word)
+	fmt.Printf("\nFound %d file(s) for \"%s\":\n", len(results), word)
 	for _, result := range results {
 		fmt.Println(result)
 	}
