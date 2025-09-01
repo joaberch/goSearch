@@ -33,7 +33,7 @@ func main() {
 			cmd.SaveIndex(path)
 			return
 		} else { //gosearch -s path
-			cmd.SaveIndex(args[1])
+			cmd.SaveIndex(args[0])
 			return
 		}
 	}
