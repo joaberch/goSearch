@@ -2,11 +2,11 @@
 A lightweight CLI search engine built in Go. Search words recursively across files from a specified folder using an in-memory or an XML inverted index.
 <hr>
 ## Features
-- Quick search for words in files and folders.<br>
-- Work in-memory with optional XML persistance.<br>
-- Registering custom indexes to search through huge amounts of data in a short time.<br>
-- Recursive parsing of the file tree with filter<br>
-- Simple CLI without dependencies<br>
+- Quick search for words in files and folders.  
+- Work in-memory with optional XML persistance.  
+- Registering custom indexes to search through huge amounts of data in a short time.  
+- Recursive parsing of the file tree with filter.  
+- Simple CLI without dependencies.  
 <hr>
 ## How to use
 1. Clone the repository
@@ -14,7 +14,7 @@ A lightweight CLI search engine built in Go. Search words recursively across fil
 git clone https://github.com/joaberch/Go-LocalSearchEngine.git
 cd Go-LocalSearchEngine
 ```
-2.   Start the setup batch with admin right, in case you don't want to or can't you can manually do it:<br>
+2.   Start the setup batch with admin right, in case you don't want to or can't you can manually do it:  
 2.1  Build the project
 ```
 cd goSearch
@@ -49,21 +49,21 @@ Found 2 file(s) for "hello":
 ```
 <hr>
 ## Requirements
-- Go 1.25 or higher<br>
-- Windows (tested on amd64)<br>
-- Admin rights (optional for setup script)
+- Go 1.25 or higher<  
+- Windows (tested on amd64)  
+- Admin rights (optional for setup script)  
 <hr>
 ## Roadmap
-- [x] In-memory indexing<br>
-- [x] XML index saving/loading<br>
-- [ ] Refactor tags/flags<br>
-- [ ] Stemming and lemmatization in Normalization<br>
-- [ ] Regex search<br>
-- [ ] Cross-platform support (for Linux and macOS)
+- [x] In-memory indexing  
+- [x] XML index saving/loading  
+- [ ] Refactor tags/flags  
+- [ ] Stemming and lemmatization in Normalization  
+- [ ] Regex search  
+- [ ] Cross-platform support (for Linux and macOS)  
 <hr>
 ## Contributing
 Pull requests are welcome!
 <hr>
 ## License
-This project is licensed under the MIT License.<br>
+This project is licensed under the MIT License.  
 See LICENSE for more information.
