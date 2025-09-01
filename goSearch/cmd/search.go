@@ -19,10 +19,10 @@ func Search(args []string) {
 		log.Fatal(err)
 	}
 
-	fmt.Printf("Indexing directory %s\n", path)
+	fmt.Printf("Indexing directory %s...\n", path)
 	index := utils.Indexate(path)
 
-	fmt.Printf("Searching for word : %s\n", word)
+	fmt.Printf("Searching for word %s...\n", word)
 	results := utils.SearchInIndex(index, word)
 	utils.DisplayResults(results, word)
 }

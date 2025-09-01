@@ -1,13 +1,11 @@
 package utils
 
 import (
-	"fmt"
 	"goSearch/internal/model"
 )
 
 // Indexate builds an inverted index from all valid files found in the given directory path.
 func Indexate(path string) model.InvertedIndex {
-	fmt.Printf("Indexing %s...\n", path)
 	tree := CreateFileTree(path)
 
 	var contents []model.FileData

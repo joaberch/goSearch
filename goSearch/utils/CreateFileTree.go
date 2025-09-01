@@ -28,7 +28,7 @@ func CreateFileTree(path string) model.TreeElement {
 		info, err := entry.Info()
 		if err != nil {
 			log.Printf("Error reading directory %s: %s", path, err)
-			return treeRoot //TODO continue
+			continue
 		}
 
 		element := model.TreeElement{
@@ -45,12 +45,7 @@ func CreateFileTree(path string) model.TreeElement {
 			child := CreateFileTree(fullPath)
 			treeRoot.Children = append(treeRoot.Children, &child)
 		} else {
-			treeRoot.Children = append(treeRoot.Children, &model.TreeElement{ //TODO replace by element
-				Name:     info.Name(),
-				Path:     fullPath,
-				IsDir:    false,
-				Children: nil,
-			})
+			treeRoot.Children = append(treeRoot.Children, &element)
 		}
 	}
 	return treeRoot

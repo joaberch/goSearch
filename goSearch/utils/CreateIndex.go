@@ -10,7 +10,7 @@ func CreateIndex(files []model.FileData) model.InvertedIndex {
 	for _, file := range files { //FUTURE: Should I create packages of x by x for goroutine?
 		seen := make(map[string]bool)
 		for _, token := range file.Content {
-			if !seen[token] { //TODO - check word validity here //FUTURE: Should I remove it and add a weight system?
+			if !seen[token] { //FUTURE: Should I remove it and add a weight system?
 				index[token] = append(index[token], file.Path)
 				seen[token] = true
 			}

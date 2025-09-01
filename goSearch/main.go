@@ -6,8 +6,8 @@ import (
 	"os"
 )
 
-func main() {
-	//Future - Use other flag parser so the flag can be placed before or after
+func main() { //Future - Display line number
+	//Future - Use another flag parser so the flag can be placed before or after
 	versionFlag := flag.Bool("v", false, "print version string")
 	longVersionFlag := flag.Bool("version", false, "print version string")
 	helpFlag := flag.Bool("h", false, "print usage string")
