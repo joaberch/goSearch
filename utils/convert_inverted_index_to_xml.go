@@ -1,6 +1,6 @@
 package utils
 
-import "github.com/joaberch/Go-LocalSearchEngine/internal/model"
+import "github.com/joaberch/goSearch/internal/model"
 
 // ConvertInvertedIndexToXML transforms an InvertedIndex into an IndexDocument for XML serialization.
 func ConvertInvertedIndexToXML(index model.InvertedIndex) model.IndexDocument { //Future: Sort by word for manual research and/or diff git

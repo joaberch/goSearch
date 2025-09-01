@@ -1,6 +1,6 @@
 package utils
 
-import "github.com/joaberch/Go-LocalSearchEngine/internal/model"
+import "github.com/joaberch/goSearch/internal/model"
 
 // CheckWordValidity returns true if the word should be included in the index.
 func CheckWordValidity(word string) bool {

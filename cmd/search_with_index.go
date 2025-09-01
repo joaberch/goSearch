@@ -2,7 +2,7 @@ package cmd
 
 import (
 	"fmt"
-	"github.com/joaberch/Go-LocalSearchEngine/utils"
+	"github.com/joaberch/goSearch/utils"
 	"log"
 	"os"
 	"path/filepath"
