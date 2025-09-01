@@ -14,6 +14,8 @@ func main() {
 	longHelpFlag := flag.Bool("help", false, "print usage string")
 	saveFlag := flag.Bool("s", false, "save search result")
 	longSaveFlag := flag.Bool("save", false, "save search result")
+	useFlag := flag.Bool("u", false, "use specific index")
+	longUseFlag := flag.Bool("use", false, "use specific index")
 	flag.Parse()
 
 	args := flag.Args()
@@ -31,6 +33,8 @@ func main() {
 			path = args[0]
 		}
 		cmd.SaveIndex(path)
+	case *useFlag || *longUseFlag:
+		cmd.SearchWithIndex(args)
 	default:
 		cmd.Search(args)
 	}
