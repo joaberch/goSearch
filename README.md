@@ -2,11 +2,11 @@
 A lightweight CLI search engine built in Go. Search words recursively across files from a specified folder using an in-memory or an XML inverted index.
 <hr>
 ## Features
-- Quick search for words in files and folders.
-- Work in-memory with optional XML persistance.
-- Registering custom indexes to search through huge amounts of data in a short time.
-- Recursive parsing of the file tree with filter
-- Simple CLI without dependencies
+- Quick search for words in files and folders.<br>
+- Work in-memory with optional XML persistance.<br>
+- Registering custom indexes to search through huge amounts of data in a short time.<br>
+- Recursive parsing of the file tree with filter<br>
+- Simple CLI without dependencies<br>
 <hr>
 ## How to use
 1. Clone the repository
@@ -49,21 +49,21 @@ Found 2 file(s) for "hello":
 ```
 <hr>
 ## Requirements
-- Go 1.25 or higher
-- Windows (tested on amd64)
+- Go 1.25 or higher<br>
+- Windows (tested on amd64)<br>
 - Admin rights (optional for setup script)
 <hr>
 ## Roadmap
-- [x] In-memory indexing
-- [x] XML index saving/loading
-- [ ] Refactor tags/flags
-- [ ] Stemming and lemmatization in Normalization
-- [ ] Regex search
+- [x] In-memory indexing<br>
+- [x] XML index saving/loading<br>
+- [ ] Refactor tags/flags<br>
+- [ ] Stemming and lemmatization in Normalization<br>
+- [ ] Regex search<br>
 - [ ] Cross-platform support (for Linux and macOS)
 <hr>
 ## Contributing
 Pull requests are welcome!
 <hr>
 ## License
-This project is licensed under the MIT License.
+This project is licensed under the MIT License.<br>
 See LICENSE for more information.
