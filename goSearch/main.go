@@ -7,6 +7,7 @@ import (
 )
 
 func main() {
+	//TODO - Use other flag parser
 	versionFlag := flag.Bool("v", false, "print version string")
 	longVersionFlag := flag.Bool("version", false, "print version string")
 	helpFlag := flag.Bool("h", false, "print usage string")
@@ -17,27 +18,21 @@ func main() {
 
 	args := flag.Args()
 
-	if *versionFlag || *longVersionFlag {
+	switch {
+	case *versionFlag || *longVersionFlag:
 		cmd.ShowVersion()
-		return
-	}
-
-	if *helpFlag || *longHelpFlag {
+	case *helpFlag || *longHelpFlag:
 		cmd.ShowHelp()
-		return
-	}
-
-	if *saveFlag || *longSaveFlag {
-		if len(args) == 0 { //gosearch -s
-			path, _ := os.Getwd()
-			cmd.SaveIndex(path)
-			return
-		} else { //gosearch -s path
-			cmd.SaveIndex(args[0])
-			return
+	case *saveFlag || *longSaveFlag:
+		var path string
+		if len(args) == 0 {
+			path, _ = os.Getwd()
+		} else {
+			path = args[0]
 		}
+		cmd.SaveIndex(path)
+	default:
+		fmt.Println("default")
+		cmd.Search(args)
 	}
-
-	word := args[0]
-	cmd.Search(word)
 }
