@@ -5,7 +5,6 @@ import (
 	"goSearch/utils"
 	"os"
 	"path/filepath"
-	"strings"
 )
 
 func SearchWithIndex(args []string) {
@@ -44,16 +43,8 @@ func SearchWithIndex(args []string) {
 	index := utils.LoadXMLIndex(file)
 
 	//Step 5 - Search in InvertedIndex
-	var results []string
-	for key, paths := range index {
-		if strings.Contains(strings.ToLower(key), strings.ToLower(word)) {
-			results = append(results, paths...)
-		}
-	}
+	results := utils.SearchInIndex(index, word)
 
 	//Step 6 - Output result
-	fmt.Printf("\nFound %d file(s) for \"%s\":\n", len(results), word)
-	for _, result := range results {
-		fmt.Println(result)
-	}
+	utils.DisplayResults(results, word)
 }
