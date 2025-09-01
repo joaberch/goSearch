@@ -11,6 +11,7 @@ import (
 func Search(args []string) {
 	if len(args) < 1 {
 		ShowHelp()
+		return
 	}
 	word := args[0]
 	//Step 1 - Indexate current path
