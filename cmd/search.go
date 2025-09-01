@@ -24,5 +24,5 @@ func Search(args []string) {
 
 	fmt.Printf("Searching for word %s...\n", word)
 	results := utils.SearchInIndex(index, word)
-	utils.DisplayResults(results, word)
+	utils.DisplayResult(results, word)
 }

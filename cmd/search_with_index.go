@@ -41,5 +41,5 @@ func SearchWithIndex(args []string) {
 	fmt.Printf("Searching for word %s in index file %s\n", word, indexPath)
 	index := utils.LoadXMLIndex(file) //Convert IndexDocument to InvertedIndex
 	results := utils.SearchInIndex(index, word)
-	utils.DisplayResults(results, word)
+	utils.DisplayResult(results, word)
 }
