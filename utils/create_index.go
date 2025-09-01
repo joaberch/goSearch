@@ -1,7 +1,7 @@
 package utils
 
 import (
-	"goSearch/internal/model"
+	"github.com/joaberch/Go-LocalSearchEngine/internal/model"
 )
 
 // CreateIndex builds an inverted index mapping each unique word to the list of files where it appears.

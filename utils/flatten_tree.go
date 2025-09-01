@@ -1,6 +1,6 @@
 package utils
 
-import "goSearch/internal/model"
+import "github.com/joaberch/Go-LocalSearchEngine/internal/model"
 
 // FlattenTree returns a flat list of all file elements from a TreeElement structure.
 func FlattenTree(tree *model.TreeElement) []*model.TreeElement {

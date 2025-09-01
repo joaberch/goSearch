@@ -2,7 +2,7 @@ package utils
 
 import (
 	"encoding/xml"
-	"goSearch/internal/model"
+	"github.com/joaberch/Go-LocalSearchEngine/internal/model"
 	"log"
 	"os"
 )

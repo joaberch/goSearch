@@ -1,7 +1,7 @@
 package utils
 
 import (
-	"goSearch/internal/model"
+	"github.com/joaberch/Go-LocalSearchEngine/internal/model"
 	"strings"
 )
 

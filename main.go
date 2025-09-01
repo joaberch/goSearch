@@ -2,7 +2,7 @@ package main
 
 import (
 	"flag"
-	"goSearch/cmd"
+	"github.com/joaberch/Go-LocalSearchEngine/cmd"
 	"os"
 )
 

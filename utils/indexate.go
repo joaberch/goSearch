@@ -1,7 +1,7 @@
 package utils
 
 import (
-	"goSearch/internal/model"
+	"github.com/joaberch/Go-LocalSearchEngine/internal/model"
 )
 
 // Indexate builds an inverted index from all valid files found in the given directory path.

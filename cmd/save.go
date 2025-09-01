@@ -2,7 +2,7 @@ package cmd
 
 import (
 	"encoding/xml"
-	"goSearch/utils"
+	"github.com/joaberch/Go-LocalSearchEngine/utils"
 	"log"
 	"os"
 	"path/filepath"
