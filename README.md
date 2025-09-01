@@ -9,7 +9,7 @@ A lightweight CLI search engine built in Go. Search words recursively across fil
 - Work in-memory with optional XML persistance.  
 - Registering custom indexes to search through huge amounts of data in a short time.  
 - Recursive parsing of the file tree with filter.  
-- Simple CLI without dependencies.
+- Simple CLI without direct dependencies.
 
 ---
 
