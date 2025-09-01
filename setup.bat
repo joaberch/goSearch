@@ -3,7 +3,6 @@
 setlocal
 
 ::Step 1 - Compile
-cd /d "%~dp0goSearch"
 go build
 
 ::Step 2 - Create utils folder in desktop if it doesn't exist
