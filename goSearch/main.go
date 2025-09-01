@@ -32,7 +32,6 @@ func main() {
 		}
 		cmd.SaveIndex(path)
 	default:
-		fmt.Println("default")
 		cmd.Search(args)
 	}
 }

@@ -8,7 +8,11 @@ import (
 )
 
 // Search return result of word in inverted index - TODO: can surely clean code more
-func Search(word string) {
+func Search(args []string) {
+	if len(args) < 1 {
+		ShowHelp()
+	}
+	word := args[0]
 	//Step 1 - Indexate current path
 	path, err := os.Getwd()
 	if err != nil {
