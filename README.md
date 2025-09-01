@@ -1,4 +1,4 @@
-# Go-LocalSearchEngine
+# goSearch  
 A lightweight CLI search engine built in Go. Search words recursively across files from a specified folder using an in-memory or an XML inverted index.
 
 ---
