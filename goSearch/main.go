@@ -15,24 +15,25 @@ func main() {
 	longSaveFlag := flag.Bool("save", false, "save search result")
 	flag.Parse()
 
-	args := os.Args[1:]
+	args := flag.Args()
 
 	if *versionFlag || *longVersionFlag {
 		cmd.ShowVersion()
 		return
 	}
 
-	if *helpFlag || *longHelpFlag || len(args) == 0 {
+	if *helpFlag || *longHelpFlag {
 		cmd.ShowHelp()
 		return
 	}
 
 	if *saveFlag || *longSaveFlag {
-		if len(args) > 1 {
-			cmd.SaveIndex(args[1])
+		if len(args) == 0 { //gosearch -s
+			path, _ := os.Getwd()
+			cmd.SaveIndex(path)
 			return
-		} else {
-			cmd.ShowHelp()
+		} else { //gosearch -s path
+			cmd.SaveIndex(args[1])
 			return
 		}
 	}
