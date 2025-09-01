@@ -2,9 +2,9 @@ package utils
 
 import "fmt"
 
-func DisplayResults(results []string, word string) {
+func DisplayResults(results map[string]bool, word string) {
 	fmt.Printf("\nFound %d file(s) for \"%s\":\n", len(results), word)
-	for _, result := range results {
-		fmt.Println(result)
+	for path := range results {
+		fmt.Printf("\t%s\n", path)
 	}
 }
