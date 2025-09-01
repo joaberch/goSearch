@@ -3,12 +3,13 @@ package cmd
 import (
 	"fmt"
 	"goSearch/utils"
+	"log"
 	"os"
 	"path/filepath"
 )
 
+// SearchWithIndex searches for a word in a saved XML index file.
 func SearchWithIndex(args []string) {
-	//Step 1 - Check args
 	if len(args) < 2 {
 		ShowHelp()
 		return
@@ -16,35 +17,29 @@ func SearchWithIndex(args []string) {
 	word := args[0]
 	indexName := args[1] + ".xml"
 
-	//Step 2 - Get index path
 	homedir, err := os.UserHomeDir()
 	if err != nil {
-		panic(err)
+		log.Fatal(err)
 	}
 	indexPath := filepath.Join(homedir, "Desktop", "utils", "index", indexName)
 	if _, err := os.Stat(indexPath); os.IsNotExist(err) {
-		fmt.Printf("index %v does not exist\n", indexName)
+		fmt.Printf("Index \"%s\" not found at \"%s\"\n", indexName, indexPath)
 		return
 	}
 
-	//Step 3 - Open path
 	file, err := os.Open(indexPath)
 	if err != nil {
-		panic(err)
+		log.Fatal(err)
 	}
-	defer func(file *os.File) {
+	defer func() {
 		err = file.Close()
 		if err != nil {
-			panic(err)
+			log.Fatal(err)
 		}
-	}(file)
+	}()
 
-	//Step 4 - Convert to InvertedIndex
-	index := utils.LoadXMLIndex(file)
-
-	//Step 5 - Search in InvertedIndex
+	fmt.Printf("Searching for word %s in index file %s\n", word, indexPath)
+	index := utils.LoadXMLIndex(file) //Convert IndexDocument to InvertedIndex
 	results := utils.SearchInIndex(index, word)
-
-	//Step 6 - Output result
 	utils.DisplayResults(results, word)
 }

@@ -2,7 +2,8 @@ package utils
 
 import "goSearch/internal/model"
 
-func CheckWordValidity(word string) bool { //AI generated
+// CheckWordValidity returns true if the word should be included in the index.
+func CheckWordValidity(word string) bool {
 	if isInvalid, exists := model.InvalidWord[word]; exists {
 		return !isInvalid
 	}

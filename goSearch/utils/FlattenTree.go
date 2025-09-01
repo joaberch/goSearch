@@ -2,6 +2,7 @@ package utils
 
 import "goSearch/internal/model"
 
+// FlattenTree returns a flat list of all file elements from a TreeElement structure.
 func FlattenTree(tree *model.TreeElement) []*model.TreeElement {
 	var files []*model.TreeElement
 	if !tree.IsDir {
@@ -11,6 +12,5 @@ func FlattenTree(tree *model.TreeElement) []*model.TreeElement {
 			files = append(files, FlattenTree(child)...)
 		}
 	}
-
 	return files
 }

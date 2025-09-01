@@ -7,7 +7,7 @@ import (
 	"path/filepath"
 )
 
-// CreateFileTree recursively return the tree structure
+// CreateFileTree builds a recursive TreeElement structure from the given directory path.
 func CreateFileTree(path string) model.TreeElement {
 	treeRoot := model.TreeElement{
 		Name:     filepath.Base(path),
@@ -28,7 +28,7 @@ func CreateFileTree(path string) model.TreeElement {
 		info, err := entry.Info()
 		if err != nil {
 			log.Printf("Error reading directory %s: %s", path, err)
-			return treeRoot
+			return treeRoot //TODO continue
 		}
 
 		element := model.TreeElement{
@@ -45,7 +45,7 @@ func CreateFileTree(path string) model.TreeElement {
 			child := CreateFileTree(fullPath)
 			treeRoot.Children = append(treeRoot.Children, &child)
 		} else {
-			treeRoot.Children = append(treeRoot.Children, &model.TreeElement{
+			treeRoot.Children = append(treeRoot.Children, &model.TreeElement{ //TODO replace by element
 				Name:     info.Name(),
 				Path:     fullPath,
 				IsDir:    false,

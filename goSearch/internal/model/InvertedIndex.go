@@ -1,3 +1,4 @@
 package model
 
-type InvertedIndex map[string][]string //Maybe overkill? TODO
+// InvertedIndex maps the word with all the files that include it
+type InvertedIndex map[string][]string

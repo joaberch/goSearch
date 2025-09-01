@@ -4,15 +4,15 @@ import (
 	"goSearch/internal/model"
 )
 
-// CreateIndex creates an inverted index
+// CreateIndex builds an inverted index mapping each unique word to the list of files where it appears.
 func CreateIndex(files []model.FileData) model.InvertedIndex {
-	index := make(model.InvertedIndex) //Instantiate my map
-	for _, file := range files {       //Process each file one by one - TODO: Should I create packages of 5 by 5 for goroutine?
-		seen := make(map[string]bool)        //"myword": true||false //if has already been processed
-		for _, token := range file.Content { //Process each word - TODO: Should I create packages of x by x for goroutine?
-			if !seen[token] { //If hasn't already been processed - TODO: Should I remove it and add a weight system?
-				index[token] = append(index[token], file.Path) //Add file path
-				seen[token] = true                             //weight system?
+	index := make(model.InvertedIndex)
+	for _, file := range files { //FUTURE: Should I create packages of x by x for goroutine?
+		seen := make(map[string]bool)
+		for _, token := range file.Content {
+			if !seen[token] { //TODO - check word validity here //FUTURE: Should I remove it and add a weight system?
+				index[token] = append(index[token], file.Path)
+				seen[token] = true
 			}
 		}
 	}

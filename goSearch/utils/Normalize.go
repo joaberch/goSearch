@@ -1,6 +1,7 @@
 package utils
 
 import (
+	"log"
 	"regexp"
 	"strings"
 )
@@ -13,19 +14,21 @@ import (
 // 5 - Stemming
 // 6 - Lemmatization
 
-// Normalize string given and returns it
+// Normalize applies basic text preprocessing to a line: lowercasing, punctuation removal, and stopword filtering.
+// Future enhancement may include stemming and lemmatization.
 func Normalize(line string) string {
-	//Step 1 - Put everything in lowercase
-	line = strings.ToLower(line)
+	line = strings.ToLower(line) //TODO trimspace
 
-	//Step 2 & 3 - Remove punctuation and special character
-	myRegexp, _ := regexp.Compile(`[^\w\s]`)
+	//Remove punctuation and special character
+	myRegexp, err := regexp.Compile(`[^\w\s]`)
+	if err != nil {
+		log.Fatal(err)
+	}
 	line = myRegexp.ReplaceAllString(line, "")
 
 	//Array with each word to remove useless one
 	words := strings.Fields(line)
 
-	//Step 4 - Remove words
 	var filteredWords []string
 	for _, word := range words {
 		if CheckWordValidity(word) {
@@ -34,10 +37,10 @@ func Normalize(line string) string {
 	}
 
 	//Step 5 - Stemming
-	//TODO
+	//FUTURE
 
 	//Step 6 - Lemmatization
-	//TODO
+	//FUTURE
 
 	return strings.Join(filteredWords, "; ")
 }

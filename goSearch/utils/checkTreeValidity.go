@@ -5,15 +5,17 @@ import (
 	"strings"
 )
 
+// CheckTreeValidity checks if the TreeElement is valid for indexing
 func CheckTreeValidity(entry model.TreeElement) bool {
 	if entry.IsDir {
-		//TODO : choose which directory not process
+		//FUTURE : choose which directory not process, like node_modules or .git
+		return true
 	} else {
 		for ext, isValid := range model.InvalidExtensions {
 			if strings.HasSuffix(entry.Path, ext) && !isValid {
 				return false
 			}
 		}
+		return true
 	}
-	return true
 }
