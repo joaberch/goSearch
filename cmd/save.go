@@ -48,5 +48,8 @@ func SaveIndex(path string) {
 	if err != nil {
 		log.Fatal(err)
 	}
+
+	utils.CompressFile(indexFile)
+
 	log.Printf("Saved index to %s\n", indexFile)
 }
