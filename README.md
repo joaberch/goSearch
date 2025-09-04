@@ -16,20 +16,32 @@ A lightweight CLI search engine built in Go. Search words recursively across fil
 
 
 ## How to use
-1. Clone the repository
-```
-git clone https://github.com/joaberch/goSearch.git
-cd goSearch
-```
-2.   Start the setup batch with admin right, in case you don't want to or can't you can manually do it:  
-2.1  Build the project
-```
-go build
-```
-2.2  Add the exe to the system path to use it everywhere
+### Windows
+1. **Download the release from *[Github Releases](https://github.com/joaberch/goSearch/releases)***
+2. **Extract the archive (ZIP file)**
+3. **Run setup-windows.bat as an administrator**
+
+It will :
+- move the executable to a utils folder in the user directory
+- Add the path to the utils folder to the system PATH so gosearch can be run from everywhere
+
+> If you can't run the batch file, you can manually :
+> - Move the binary to a specific folder
+> - Add that folder to the system PATH
 
 ---
+### Linux
+1. **Download the release from *[Github Releases](https://github.com/joaberch/goSearch/releases)***
+2. Extract the archive (TAR)
+3. Run the setup script : `bash setup-linux.sh`
 
+It will :
+- move the executable to a utils folder in the user directory `~/utils`
+- Add the utils folder to the system path using .bashrc
+
+> If you can't run the shell file, you can manually :
+> - Move the binary to ``~\utils``
+> - Add ``export PATH="$PATH:$HOME/utils"`` to .bashrc or .zshrc
 
 ## Usage
 
@@ -74,11 +86,12 @@ Found 2 file(s) for "hello":
 
 ## Roadmap
 - [x] In-memory indexing  
-- [x] XML index saving/loading  
+- [x] XML index saving/loading
+- [x] Compressing index
 - [ ] Refactor tags/flags  
 - [ ] Stemming and lemmatization in Normalization  
 - [ ] Regex search  
-- [ ] Cross-platform support (for Linux and macOS)
+- [x] Cross-platform support (for Linux and macOS)
 
 ---
 
