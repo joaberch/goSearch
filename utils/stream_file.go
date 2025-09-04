@@ -2,7 +2,7 @@ package utils
 
 import (
 	"bufio"
-	"github.com/joaberch/Go-LocalSearchEngine/internal/model"
+	"github.com/joaberch/goSearch/internal/model"
 	"log"
 	"os"
 	"strings"

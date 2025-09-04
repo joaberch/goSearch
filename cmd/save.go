@@ -2,7 +2,7 @@ package cmd
 
 import (
 	"encoding/xml"
-	"github.com/joaberch/Go-LocalSearchEngine/utils"
+	"github.com/joaberch/goSearch/utils"
 	"log"
 	"os"
 	"path/filepath"
@@ -48,5 +48,8 @@ func SaveIndex(path string) {
 	if err != nil {
 		log.Fatal(err)
 	}
+
+	utils.CompressFile(indexFile)
+
 	log.Printf("Saved index to %s\n", indexFile)
 }
