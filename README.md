@@ -105,4 +105,4 @@ Pull requests are welcome!
 
 ## License
 This project is licensed under the MIT License.  
-See LICENSE for more information.
+See (LICENSE)[https://github.com/joaberch/goSearch/blob/dev/LICENSE] for more information.
