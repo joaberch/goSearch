@@ -2,16 +2,14 @@ package main
 
 import (
 	"github.com/joaberch/goSearch/cmd"
+	"log"
 	"os"
 )
 
 func main() { //Future - Display line number
-	args := os.Args[1:] //1 is gosearch
+	args := os.Args[1:] //first is gosearch
 	if len(args) == 0 {
 		cmd.ShowHelp()
-		return
-	} else if len(args) == 1 {
-		cmd.Search(args[0])
 		return
 	}
 
@@ -29,11 +27,23 @@ func main() { //Future - Display line number
 				return
 			}
 		case "-s", "--save":
+			var path string
+			var err error
 			if i+1 < len(args) {
-				cmd.SaveIndex(args[i+1])
+				path = args[i+1]
+			} else {
+				path, err = os.Getwd()
+				if err != nil {
+					log.Fatal(err)
+				}
+			}
+			cmd.SaveIndex(path)
+			return
+		default:
+			if len(args) == 1 {
+				cmd.Search(args[0])
 				return
 			}
-		default:
 			cmd.ShowHelp()
 			return
 		}
