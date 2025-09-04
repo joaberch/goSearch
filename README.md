@@ -29,7 +29,6 @@ It will :
 > - Move the binary to a specific folder
 > - Add that folder to the system PATH
 
----
 ### Linux
 1. **Download the release from *[Github Releases](https://github.com/joaberch/goSearch/releases)***
 2. Extract the archive (TAR)
@@ -42,6 +41,8 @@ It will :
 > If you can't run the shell file, you can manually :
 > - Move the binary to ``~\utils``
 > - Add ``export PATH="$PATH:$HOME/utils"`` to .bashrc or .zshrc
+
+---
 
 ## Usage
 
