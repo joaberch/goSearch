@@ -6,7 +6,7 @@ import (
 )
 
 // ConvertInvertedIndexToXML transforms an InvertedIndex into an IndexDocument for XML serialization.
-func ConvertInvertedIndexToXML(index model.InvertedIndex) model.IndexDocument { //Future: Sort by word for manual research and/or diff git
+func ConvertInvertedIndexToXML(index model.InvertedIndex) model.IndexDocument {
 	var entries []model.IndexEntry
 	for word, files := range index {
 		entries = append(entries, model.IndexEntry{Word: word, Files: files})
