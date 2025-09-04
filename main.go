@@ -1,41 +1,41 @@
 package main
 
 import (
-	"flag"
 	"github.com/joaberch/goSearch/cmd"
 	"os"
 )
 
 func main() { //Future - Display line number
-	//Future - Use another flag parser so the flag can be placed before or after
-	versionFlag := flag.Bool("v", false, "print version string")
-	longVersionFlag := flag.Bool("version", false, "print version string")
-	helpFlag := flag.Bool("h", false, "print usage string")
-	longHelpFlag := flag.Bool("help", false, "print usage string")
-	saveFlag := flag.Bool("s", false, "save search result")
-	longSaveFlag := flag.Bool("save", false, "save search result")
-	useFlag := flag.Bool("u", false, "use specific index")
-	longUseFlag := flag.Bool("use", false, "use specific index")
-	flag.Parse()
-
-	args := flag.Args()
-
-	switch {
-	case *versionFlag || *longVersionFlag:
-		cmd.ShowVersion()
-	case *helpFlag || *longHelpFlag:
+	args := os.Args[1:] //1 is gosearch
+	if len(args) == 0 {
 		cmd.ShowHelp()
-	case *saveFlag || *longSaveFlag:
-		var path string
-		if len(args) == 0 {
-			path, _ = os.Getwd()
-		} else {
-			path = args[0]
+		return
+	} else if len(args) == 1 {
+		cmd.Search(args[0])
+		return
+	}
+
+	for i, arg := range args {
+		switch arg {
+		case "-h", "--help":
+			cmd.ShowHelp()
+			return
+		case "-v", "--version":
+			cmd.ShowVersion()
+			return
+		case "-u", "--use":
+			if i+2 < len(args) {
+				cmd.SearchWithIndex(args[i+2], args[i+1])
+				return
+			}
+		case "-s", "--save":
+			if i+1 < len(args) {
+				cmd.SaveIndex(args[i+1])
+				return
+			}
+		default:
+			cmd.ShowHelp()
+			return
 		}
-		cmd.SaveIndex(path)
-	case *useFlag || *longUseFlag:
-		cmd.SearchWithIndex(args)
-	default:
-		cmd.Search(args)
 	}
 }

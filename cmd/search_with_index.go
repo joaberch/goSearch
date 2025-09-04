@@ -9,13 +9,8 @@ import (
 )
 
 // SearchWithIndex searches for a word in a saved XML index file.
-func SearchWithIndex(args []string) {
-	if len(args) < 2 {
-		ShowHelp()
-		return
-	}
-	word := args[0]
-	compressedIndexName := args[1] + ".xml.gz"
+func SearchWithIndex(word string, compressedIndexName string) {
+	compressedIndexName += ".xml.gz"
 
 	homedir, err := os.UserHomeDir()
 	if err != nil {
