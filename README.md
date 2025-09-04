@@ -10,7 +10,7 @@ A lightweight CLI search engine built in Go. Search words recursively across fil
 - Work in-memory with optional XML persistance.  
 - Registering custom indexes to search through huge amounts of data in a short time.  
 - Recursive parsing of the file tree with filter.  
-- Simple CLI without direct dependencies.
+- Simple CLI without dependencies.
 
 ---
 
@@ -88,8 +88,7 @@ Found 2 file(s) for "hello":
 ## Roadmap
 - [x] In-memory indexing  
 - [x] XML index saving/loading
-- [x] Compressing index
-- [ ] Refactor tags/flags  
+- [x] Compressing index 
 - [ ] Stemming and lemmatization in Normalization  
 - [ ] Regex search  
 - [x] Cross-platform support (for Linux and macOS)
