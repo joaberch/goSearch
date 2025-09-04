@@ -29,15 +29,6 @@ func SaveIndex(path string) {
 	}
 	indexFile := filepath.Join(indexPath, filename)
 	file, err := os.Create(indexFile)
-	if err != nil {
-		log.Fatal(err)
-	}
-	defer func() {
-		err = file.Close()
-		if err != nil {
-			log.Fatal(err)
-		}
-	}()
 
 	index := utils.Indexate(path)
 	xmlIndex := utils.ConvertInvertedIndexToXML(index)
@@ -51,5 +42,15 @@ func SaveIndex(path string) {
 
 	utils.CompressFile(indexFile)
 
-	log.Printf("Saved index to %s\n", indexFile)
+	err = file.Close()
+	if err != nil {
+		log.Fatal(err)
+	}
+
+	err = os.Remove(indexFile)
+	if err != nil {
+		log.Fatal(err)
+	}
+
+	log.Printf("Saved index to %s.gz\n", indexFile)
 }
