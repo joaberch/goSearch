@@ -65,7 +65,7 @@ gosearch -s path/to    # Save index of specified path
 ```
 ### Use saved index
 ```
-gosearch -u hello temp  # Search for 'hello' in the index named 'temp.xml'
+gosearch -u temp hello  # Search for 'hello' in the index named 'temp.xml'
 ```
 ### Output Example
 ```
