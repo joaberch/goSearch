@@ -15,7 +15,7 @@ func SaveIndex(path string) {
 	if err != nil {
 		log.Fatal(err)
 	}
-	indexPath := filepath.Join(homedir, "Desktop", "utils", "index") //FUTURE: user choose output path?
+	indexPath := filepath.Join(homedir, "Desktop", "utils", "index") //output path
 	if _, err = os.Stat(indexPath); os.IsNotExist(err) {
 		err = os.MkdirAll(indexPath, os.ModePerm)
 		if err != nil {
@@ -23,21 +23,16 @@ func SaveIndex(path string) {
 		}
 	}
 
-	filename := filepath.Base(path)
+	absPath, err := filepath.Abs(path)
+	if err != nil {
+		log.Fatal(err)
+	}
+	filename := filepath.Base(absPath)
 	if !strings.HasSuffix(filename, ".xml") {
 		filename += ".xml"
 	}
 	indexFile := filepath.Join(indexPath, filename)
 	file, err := os.Create(indexFile)
-	if err != nil {
-		log.Fatal(err)
-	}
-	defer func() {
-		err = file.Close()
-		if err != nil {
-			log.Fatal(err)
-		}
-	}()
 
 	index := utils.Indexate(path)
 	xmlIndex := utils.ConvertInvertedIndexToXML(index)
@@ -51,5 +46,15 @@ func SaveIndex(path string) {
 
 	utils.CompressFile(indexFile)
 
-	log.Printf("Saved index to %s\n", indexFile)
+	err = file.Close()
+	if err != nil {
+		log.Fatal(err)
+	}
+
+	err = os.Remove(indexFile)
+	if err != nil {
+		log.Fatal(err)
+	}
+
+	log.Printf("Saved index to %s.gz\n", indexFile)
 }

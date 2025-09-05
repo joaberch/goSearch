@@ -7,11 +7,13 @@ import (
 
 // SearchInIndex returns a map of file paths where the given word appears in the inverted index.
 // The search is case-insensitive and matches partial words.
-func SearchInIndex(index model.InvertedIndex, word string) map[string]bool {
+func SearchInIndex(index model.InvertedIndex, word string, mode string) map[string]bool {
 	var results = make(map[string]bool)
 	lowerWord := strings.ToLower(word)
 	for key, paths := range index {
-		if strings.Contains(strings.ToLower(key), lowerWord) { //FUTURE : user choose if contains or if equals
+		keyLower := strings.ToLower(key)
+		if (strings.Contains(keyLower, lowerWord) && mode == "contains") || //Future: regex
+			(mode == "exact" && keyLower == lowerWord) {
 			for _, path := range paths {
 				results[path] = true
 			}

@@ -8,7 +8,11 @@ import (
 // CheckTreeValidity checks if the TreeElement is valid for indexing
 func CheckTreeValidity(entry model.TreeElement) bool {
 	if entry.IsDir {
-		//FUTURE : choose which directory not process, like node_modules or .git
+		for folder, isInvalid := range model.InvalidFolder {
+			if entry.Name == folder && isInvalid {
+				return false
+			}
+		}
 		return true
 	} else {
 		for ext, isValid := range model.InvalidExtensions {

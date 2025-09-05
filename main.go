@@ -1,41 +1,34 @@
 package main
 
 import (
-	"flag"
 	"github.com/joaberch/goSearch/cmd"
+	"github.com/joaberch/goSearch/internal/model"
+	"github.com/joaberch/goSearch/utils"
 	"os"
 )
 
+// Future - display usable index and date
 func main() { //Future - Display line number
-	//Future - Use another flag parser so the flag can be placed before or after
-	versionFlag := flag.Bool("v", false, "print version string")
-	longVersionFlag := flag.Bool("version", false, "print version string")
-	helpFlag := flag.Bool("h", false, "print usage string")
-	longHelpFlag := flag.Bool("help", false, "print usage string")
-	saveFlag := flag.Bool("s", false, "save search result")
-	longSaveFlag := flag.Bool("save", false, "save search result")
-	useFlag := flag.Bool("u", false, "use specific index")
-	longUseFlag := flag.Bool("use", false, "use specific index")
-	flag.Parse()
-
-	args := flag.Args()
-
-	switch {
-	case *versionFlag || *longVersionFlag:
-		cmd.ShowVersion()
-	case *helpFlag || *longHelpFlag:
+	args := os.Args[1:] //first is gosearch
+	if len(args) == 0 {
 		cmd.ShowHelp()
-	case *saveFlag || *longSaveFlag:
-		var path string
-		if len(args) == 0 {
-			path, _ = os.Getwd()
-		} else {
-			path = args[0]
-		}
-		cmd.SaveIndex(path)
-	case *useFlag || *longUseFlag:
-		cmd.SearchWithIndex(args)
+		return
+	}
+
+	parsed := utils.ParseArgs(args)
+
+	switch parsed.Command {
+	case model.CmdHelp:
+		cmd.ShowHelp()
+	case model.CmdVersion:
+		cmd.ShowVersion()
+	case model.CmdSave:
+		cmd.SaveIndex(parsed.SavePath)
+	case model.CmdUse:
+		cmd.SearchWithIndex(parsed.SearchArg, parsed.IndexPath, parsed.MatchMode)
+	case model.CmdSearch:
+		cmd.Search(parsed.SearchArg, parsed.MatchMode)
 	default:
-		cmd.Search(args)
+		cmd.ShowHelp()
 	}
 }

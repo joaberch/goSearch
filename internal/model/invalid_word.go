@@ -13,4 +13,5 @@ var InvalidWord = map[string]bool{
 	"in":     true,
 	"of":     true,
 	"de":     true,
+	"":       true,
 }
