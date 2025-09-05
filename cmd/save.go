@@ -33,6 +33,9 @@ func SaveIndex(path string) {
 	}
 	indexFile := filepath.Join(indexPath, filename)
 	file, err := os.Create(indexFile)
+	if err != nil {
+		log.Fatal(err)
+	}
 
 	index := utils.Indexate(path)
 	xmlIndex := utils.ConvertInvertedIndexToXML(index)
