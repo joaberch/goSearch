@@ -4,25 +4,28 @@ import "fmt"
 
 func ShowHelp() {
 	fmt.Println("Usage:")
-	fmt.Println("  gosearch <word>             			Search for a word in the current directory")
-	fmt.Println("  gosearch -use <index> <word> 		Search for a word using a saved index")
-	fmt.Println("  gosearch -save [path]                 Save an index of the current or specified path")
-	fmt.Println("  gosearch -version                     Display version information")
-	fmt.Println("  gosearch -help                        Display this help message")
+	fmt.Println("  gosearch [options] <search_term>")
 	fmt.Println()
 
-	fmt.Println("Options:")
+	fmt.Println("Commands:")
+	fmt.Println("  -h, --help                			Show this help message")
 	fmt.Println("  -v, --version          				Show version information")
-	fmt.Println("  -h, --help                			Show usage help")
-	fmt.Println("  -s, --save                			Save index of current or specified path in Desktop/utils/index")
+	fmt.Println("  -s, --save                			Save an index of given folder")
 	fmt.Println("  -u, --use                  			Use a specific saved index for search")
 	fmt.Println()
 
+	fmt.Println("Options:")
+	fmt.Println("  -m, --match <mode>					Set match mode: 'contains' (default) or 'exact'")
+
 	fmt.Println("Examples:")
-	fmt.Println("  gosearch hello                        Search for 'hello' in current directory")
-	fmt.Println("  gosearch -s                           Save index of current directory")
-	fmt.Println("  gosearch -s /path/to/folder           Save index of specified folder")
-	fmt.Println("  gosearch -u temp hello                Search for 'hello' in index named 'temp'")
-	fmt.Println("  gosearch -version                     Show version info")
-	fmt.Println("  gosearch -help                        Show this help message")
+	fmt.Println("  gosearch hello                       Search for 'hello' in current directory")
+	fmt.Println("  gosearch -s                          Save index of current directory")
+	fmt.Println("  gosearch -s /path/to/folder          Save index of specified folder")
+	fmt.Println("  gosearch -u temp hello              	Search for 'hello' in an index named 'temp', loose verification")
+	fmt.Println("  gosearch hello -m exact -u temp		Search for 'hello' in an index named 'temp', strict verification")
+	fmt.Println()
+
+	fmt.Println("Notes:")
+	fmt.Println("  - The search is case-insensitive")
+	fmt.Println("  - The options and commands can be placed before or after the search term")
 }
