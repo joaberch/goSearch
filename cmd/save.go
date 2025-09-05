@@ -23,7 +23,11 @@ func SaveIndex(path string) {
 		}
 	}
 
-	filename := filepath.Base(path)
+	absPath, err := filepath.Abs(path)
+	if err != nil {
+		log.Fatal(err)
+	}
+	filename := filepath.Base(absPath)
 	if !strings.HasSuffix(filename, ".xml") {
 		filename += ".xml"
 	}
