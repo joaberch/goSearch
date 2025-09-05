@@ -9,7 +9,7 @@ import (
 )
 
 // SearchWithIndex searches for a word in a saved XML index file.
-func SearchWithIndex(word string, compressedIndexName string) {
+func SearchWithIndex(word string, compressedIndexName string, mode string) {
 	compressedIndexName += ".xml.gz"
 
 	homedir, err := os.UserHomeDir()
@@ -43,6 +43,6 @@ func SearchWithIndex(word string, compressedIndexName string) {
 
 	fmt.Printf("Searching for word %s in index file %s\n", word, compressedIndexPath)
 	index := utils.LoadXMLIndex(file) //Convert IndexDocument to InvertedIndex
-	results := utils.SearchInIndex(index, word)
+	results := utils.SearchInIndex(index, word, mode)
 	utils.DisplayResult(results, word)
 }

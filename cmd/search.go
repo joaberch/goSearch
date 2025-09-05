@@ -8,7 +8,7 @@ import (
 )
 
 // Search performs a word lookup in the inverted index of the current directory
-func Search(word string) {
+func Search(word string, mode string) {
 	path, err := os.Getwd()
 	if err != nil {
 		log.Fatal(err)
@@ -18,6 +18,6 @@ func Search(word string) {
 	index := utils.Indexate(path)
 
 	fmt.Printf("Searching for word %s...\n", word)
-	results := utils.SearchInIndex(index, word)
+	results := utils.SearchInIndex(index, word, mode)
 	utils.DisplayResult(results, word)
 }

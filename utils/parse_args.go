@@ -39,6 +39,16 @@ func ParseArgs(args []string) model.ParsedArgs {
 				}
 				parsed.SavePath = path
 			}
+		case "-m", "--match":
+			if i+1 < len(args) {
+				mode := args[i+1]
+				if mode == "exact" || mode == "contains" {
+					parsed.MatchMode = mode
+					i++
+				} else {
+					parsed.Command = model.CmdHelp
+				}
+			}
 		default:
 			unknownArgs = append(unknownArgs, arg) //Get search word, different position possible
 		}

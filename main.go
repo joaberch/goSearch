@@ -25,9 +25,9 @@ func main() { //Future - Display line number
 	case model.CmdSave:
 		cmd.SaveIndex(parsed.SavePath)
 	case model.CmdUse:
-		cmd.SearchWithIndex(parsed.SearchArg, parsed.IndexPath)
+		cmd.SearchWithIndex(parsed.SearchArg, parsed.IndexPath, parsed.MatchMode)
 	case model.CmdSearch:
-		cmd.Search(parsed.SearchArg)
+		cmd.Search(parsed.SearchArg, parsed.MatchMode)
 	default:
 		cmd.ShowHelp()
 	}
