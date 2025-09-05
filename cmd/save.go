@@ -15,7 +15,7 @@ func SaveIndex(path string) {
 	if err != nil {
 		log.Fatal(err)
 	}
-	indexPath := filepath.Join(homedir, "Desktop", "utils", "index") //FUTURE: user choose output path?
+	indexPath := filepath.Join(homedir, "Desktop", "utils", "index") //output path
 	if _, err = os.Stat(indexPath); os.IsNotExist(err) {
 		err = os.MkdirAll(indexPath, os.ModePerm)
 		if err != nil {
