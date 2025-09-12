@@ -8,6 +8,6 @@ const (
 	CmdHelp
 	CmdVersion
 	CmdSave
-	CmdUse
+	CmdSearchWithIndex
 	CmdShowIndex
 )

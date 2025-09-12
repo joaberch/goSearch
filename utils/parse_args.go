@@ -22,7 +22,7 @@ func ParseArgs(args []string) model.ParsedArgs {
 		case "-v", "--version":
 			parsed.Command = model.CmdVersion
 		case "-u", "--use":
-			parsed.Command = model.CmdUse
+			parsed.Command = model.CmdSearchWithIndex
 			if i+1 < len(args) {
 				parsed.IndexPath = args[i+1]
 				i++
@@ -60,7 +60,7 @@ func ParseArgs(args []string) model.ParsedArgs {
 	if parsed.Command == model.CmdNone && len(unknownArgs) > 0 {
 		parsed.Command = model.CmdSearch
 		parsed.SearchArg = unknownArgs[0]
-	} else if parsed.Command == model.CmdUse && len(unknownArgs) > 0 {
+	} else if parsed.Command == model.CmdSearchWithIndex && len(unknownArgs) > 0 {
 		parsed.SearchArg = unknownArgs[0]
 	}
 
