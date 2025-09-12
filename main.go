@@ -7,7 +7,7 @@ import (
 	"os"
 )
 
-func main() { //Future - Display line number
+func main() {
 	args := os.Args[1:] //first is 'gosearch'
 	if len(args) == 0 {
 		cmd.ShowHelp()
