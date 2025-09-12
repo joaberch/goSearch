@@ -33,8 +33,7 @@ func StreamFile(element *model.TreeElement) model.FileData {
 
 	var contents []string
 	for scanner.Scan() {
-		line := Normalize(scanner.Text()) //Normalize line
-		words := strings.Split(line, ";")
+		words := Normalize(scanner.Text()) //Normalize line
 		for _, word := range words {
 			contents = append(contents, strings.TrimSpace(word))
 		}

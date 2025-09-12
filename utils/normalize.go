@@ -16,7 +16,7 @@ import (
 
 // Normalize applies basic text preprocessing to a line: lowercasing, punctuation removal, and stopword filtering.
 // Future enhancement may include stemming and lemmatization.
-func Normalize(line string) string {
+func Normalize(line string) []string {
 	line = strings.ToLower(line)
 	line = strings.TrimSpace(line)
 
@@ -43,5 +43,5 @@ func Normalize(line string) string {
 	//Step 6 - Lemmatization
 	//FUTURE
 
-	return strings.Join(filteredWords, "; ")
+	return filteredWords
 }
