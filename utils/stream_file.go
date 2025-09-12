@@ -11,7 +11,8 @@ import (
 // StreamFile reads a file line by line, normalizes its content, and returns a FileData structure containing the extracted words.
 func StreamFile(element *model.TreeElement) model.FileData {
 	newFile := model.FileData{
-		Path: element.Path,
+		Path:    element.Path,
+		Content: make(map[int]string),
 	}
 
 	file, err := os.Open(newFile.Path)
@@ -20,7 +21,7 @@ func StreamFile(element *model.TreeElement) model.FileData {
 		return newFile
 	}
 	defer func() {
-		err := file.Close()
+		err = file.Close()
 		if err != nil {
 			log.Fatal(err)
 		}
@@ -31,18 +32,16 @@ func StreamFile(element *model.TreeElement) model.FileData {
 	buf := make([]byte, maxCapacity)
 	scanner.Buffer(buf, maxCapacity)
 
-	var contents []string
+	lineNumber := 1
 	for scanner.Scan() {
-		words := Normalize(scanner.Text()) //Normalize line
-		for _, word := range words {
-			contents = append(contents, strings.TrimSpace(word))
-		}
+		normalizedWords := Normalize(scanner.Text()) //Normalize line
+		newFile.Content[lineNumber] = strings.Join(normalizedWords, " ")
+		lineNumber++
 	}
 
 	if err = scanner.Err(); err != nil {
 		log.Fatal(err)
 	}
 
-	newFile.Content = contents
 	return newFile
 }

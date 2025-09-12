@@ -6,15 +6,15 @@ import (
 	"strings"
 )
 
-// Normalization guideline :
+// Normalization guideline:
 // 1 - Everything in lowercase
 // 2 - Remove punctuation
 // 3 - Remove special character
-// 4 - Remove words (the, is, and, etc) - not required but surely needed in that application
+// 4 - Remove words (the, is, and, etc.) - not required but surely needed in that application
 // 5 - Stemming
 // 6 - Lemmatization
 
-// Normalize applies basic text preprocessing to a line: lowercasing, punctuation removal, and stopword filtering.
+// Normalize applies basic text preprocessing to a line: lowercasing, punctuation removal, and word filtering.
 // Future enhancement may include stemming and lemmatization.
 func Normalize(line string) []string {
 	line = strings.ToLower(line)
@@ -38,7 +38,7 @@ func Normalize(line string) []string {
 	}
 
 	//Step 5 - Stemming
-	//FUTURE
+	//FUTURE (snowball?)
 
 	//Step 6 - Lemmatization
 	//FUTURE

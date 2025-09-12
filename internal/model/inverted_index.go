@@ -1,9 +1,11 @@
 package model
 
-// InvertedIndex maps the word with all the files that include it
-type InvertedIndex map[string][]string
 import "sort"
 
+// InvertedIndex is an array of the inverted index entry
+type InvertedIndex struct {
+	Entries []InvertedIndexEntry
+}
 
 // ToXMLDocument converts an InvertedIndex to an IndexDocument
 func (index *InvertedIndex) ToXMLDocument() IndexDocument {

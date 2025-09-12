@@ -5,6 +5,7 @@ import (
 	"github.com/joaberch/goSearch/internal/model"
 	"log"
 	"os"
+	"sort"
 )
 
 // LoadXMLIndex parses an XML index file and returns an InvertedIndex structure.
@@ -16,9 +17,16 @@ func LoadXMLIndex(file *os.File) model.InvertedIndex {
 		log.Fatal(err)
 	}
 
-	index := make(model.InvertedIndex)
+	var index model.InvertedIndex
 	for _, entry := range document.Entries {
-		index[entry.Word] = entry.Files
+		index.Entries = append(index.Entries, model.InvertedIndexEntry{
+			Word:  entry.Word,
+			Files: entry.Files,
+		})
 	}
+
+	sort.Slice(index.Entries, func(i, j int) bool {
+		return index.Entries[i].Word < index.Entries[j].Word
+	})
 	return index
 }
