@@ -38,7 +38,7 @@ func SaveIndex(path string) {
 	}
 
 	index := utils.Indexate(path)
-	xmlIndex := utils.ConvertInvertedIndexToXML(index)
+	xmlIndex := index.ToXMLDocument()
 
 	encoder := xml.NewEncoder(file)
 	encoder.Indent("", "\t")
