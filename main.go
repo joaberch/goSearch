@@ -28,6 +28,8 @@ func main() { //Future - Display line number
 		cmd.SearchWithIndex(parsed.SearchArg, parsed.IndexPath, parsed.MatchMode)
 	case model.CmdSearch:
 		cmd.Search(parsed.SearchArg, parsed.MatchMode)
+	case model.CmdShowIndex:
+		cmd.ListIndexes()
 	default:
 		cmd.ShowHelp()
 	}

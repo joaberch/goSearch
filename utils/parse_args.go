@@ -49,6 +49,8 @@ func ParseArgs(args []string) model.ParsedArgs {
 					parsed.Command = model.CmdHelp
 				}
 			}
+		case "-l", "--list-indexes":
+			parsed.Command = model.CmdShowIndex
 		default:
 			unknownArgs = append(unknownArgs, arg) //Get search word, different position possible
 		}
