@@ -10,6 +10,7 @@ var InvalidExtensions = map[string]bool{
 	".mp3":    false,
 	".mp4":    false,
 	".zip":    false,
+	".gz":     false,
 	".ttf":    false,
 	".otf":    false,
 	".png":    false,
