@@ -27,6 +27,10 @@ func ListIndexes() {
 	}
 	fmt.Println("Available indexes:")
 	for _, entry := range entries {
-		fmt.Println(" - ", entry.Name())
+		info, err := entry.Info()
+		if err != nil {
+			log.Fatal(err)
+		}
+		fmt.Println(" - ", entry.Name(), " - ", info.ModTime().Format("2006-01-02 15:04:05"))
 	}
 }
