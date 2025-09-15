@@ -2,6 +2,7 @@ package cmd
 
 import (
 	"fmt"
+	"github.com/joaberch/goSearch/internal/model"
 	"github.com/joaberch/goSearch/utils"
 	"log"
 	"os"
@@ -9,7 +10,7 @@ import (
 )
 
 // SearchWithIndex searches for a word in a saved XML index file.
-func SearchWithIndex(word string, compressedIndexName string, mode string) {
+func SearchWithIndex(word string, compressedIndexName string, mode model.MatchMode) {
 	compressedIndexName += ".xml.gz"
 
 	homedir, err := os.UserHomeDir()
@@ -23,12 +24,12 @@ func SearchWithIndex(word string, compressedIndexName string, mode string) {
 	}
 
 	indexPath := utils.Decompress(compressedIndexPath)
-	defer func(name string) {
-		err := os.Remove(name)
+	defer func() {
+		err = os.Remove(indexPath)
 		if err != nil {
 			log.Fatal(err)
 		}
-	}(indexPath)
+	}()
 
 	file, err := os.Open(indexPath)
 	if err != nil {

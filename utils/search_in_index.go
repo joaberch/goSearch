@@ -8,14 +8,14 @@ import (
 )
 
 // SearchInIndex returns a map of file paths where the given word appears in the inverted index.
-// The search is case-insensitive and matches partial words.
-func SearchInIndex(index model.InvertedIndex, word string, mode string) map[string][]int {
+// Case-insensitive search. Mode "contains" does substring match; mode "exact" matches whole keys; mode "regex" matches regex expression.
+func SearchInIndex(index model.InvertedIndex, word string, mode model.MatchMode) map[string][]int {
 	var results = make(map[string][]int)
 	lowerWord := strings.ToLower(word)
 
 	var regex *regexp.Regexp
 	var err error
-	if mode == "regex" {
+	if mode == model.Regex {
 		regex, err = regexp.Compile(lowerWord)
 		if err != nil {
 			log.Fatal(err)
@@ -27,11 +27,11 @@ func SearchInIndex(index model.InvertedIndex, word string, mode string) map[stri
 
 		isMatching := false
 		switch mode {
-		case "contains":
+		case model.Contains:
 			isMatching = strings.Contains(entry.Word, lowerWord)
-		case "exact":
+		case model.Exact:
 			isMatching = entry.Word == lowerWord
-		case "regex":
+		case model.Regex:
 			isMatching = regex.MatchString(entry.Word)
 		}
 		if isMatching {

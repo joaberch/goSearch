@@ -8,15 +8,14 @@ import (
 // CheckTreeValidity checks if the TreeElement is valid for indexing
 func CheckTreeValidity(entry model.TreeElement) bool {
 	if entry.IsDir {
-		for folder, isInvalid := range model.InvalidFolder {
-			if entry.Name == folder && isInvalid {
-				return false
-			}
+		if invalid, ok := model.InvalidFolder[entry.Name]; ok && invalid {
+			return false
 		}
 		return true
 	} else {
-		for ext, isValid := range model.InvalidExtensions {
-			if strings.HasSuffix(entry.Path, ext) && !isValid {
+		lowerPath := strings.ToLower(entry.Path)
+		for ext, allowed := range model.ExtensionsAllowed {
+			if strings.HasSuffix(lowerPath, strings.ToLower(ext)) && !allowed {
 				return false
 			}
 		}

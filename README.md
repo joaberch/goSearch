@@ -1,16 +1,16 @@
 # goSearch  
 [![Go Report Card](https://goreportcard.com/badge/github.com/joaberch/goSearch)](https://goreportcard.com/report/github.com/joaberch/goSearch)  
-A lightweight CLI search engine built in Go that recursively search words across files from a specified folder using an in-memory or a compressed XML inverted index.
+A lightweight CLI search engine in Go that recursively searches words across files from a specified folder using an in-memory or a compressed XML inverted index.
 
 ---
 
 
 ## Features
-- Quick recursive search for words across files and folders.  
+- Fast recursive search for words across files and folders.  
 - Work in-memory with optional XML persistence for even faster search.  
 - Registering custom indexes to search through huge amounts of data in a short time.  
 - Recursive parsing of the file tree with filter.  
-- Pure Go CLI with ***0** external dependencies.
+- Pure Go CLI with **0** external dependencies.
 
 ---
 
@@ -35,11 +35,11 @@ This will :
 3. Run the setup script : `bash setup-linux.sh`.
 
 This will :
-- Move the binary to `~/utils`.
+- Move the binary to ``~/utils``.
 - Add the utils folder to the system ``PATH`` using ``.bashrc``.
 
 > Manual setup :
-> - Move the binary to ``~\utils``
+> - Move the binary to ``~/utils``
 > - Add ``export PATH="$PATH:$HOME/utils"`` to .bashrc or .zshrc
 
 ---
@@ -48,29 +48,29 @@ This will :
 
 ### Help & Version
 
-```
+```bash
 gosearch -h                         # Show help
 gosearch -v                         # Show version
 ```
 
 ### Search from current directory
 
-```
-gosearch hello                      # Search for 'hello' recursively#
+```bash
+gosearch hello                      # Search for 'hello' recursively
 ```
 ### Save index to XML
-```
+```bash
 gosearch -s                         # Save index of current directory
 gosearch -s path/to                 # Save index of specified path
 ```
 Saved to : ``~/Desktop/utils/index/<folder>.xml.gz``
 ### Use saved index
-```
+```bash
 gosearch -u temp hello              # Search 'hello' in the index file 'temp.xml'
 gosearch hello -m exact -u temp     # Same with exact match mode
 ```
 ### Output Example
-```
+```bash
 Found 2 file(s) for "hello":
   C:\Users\you\Documents\project\file1.txt
   C:\Users\you\Documents\project\notes.txt
@@ -101,7 +101,7 @@ Found 2 file(s) for "hello":
 - [x] Compressing index 
 - [ ] Stemming and lemmatization in Normalization  
 - [x] Regex search  
-- [x] Line number
+- [x] Line numbers
 - [x] Cross-platform support (for Linux and macOS)
 
 ---
@@ -114,4 +114,4 @@ Pull requests are welcome!
 
 ## License
 This project is licensed under the MIT License.  
-See [LICENSE](https://github.com/joaberch/goSearch/blob/dev/LICENSE) for more information.
+See [LICENSE](./LICENSE) for more information.

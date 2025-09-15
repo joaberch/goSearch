@@ -1,7 +1,7 @@
 package model
 
-// InvalidExtensions maps extension and their validity
-var InvalidExtensions = map[string]bool{
+// ExtensionsAllowed maps extension and their validity
+var ExtensionsAllowed = map[string]bool{
 	".bin":    false,
 	".exe":    false,
 	".dll":    false,

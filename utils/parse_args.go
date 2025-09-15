@@ -9,7 +9,7 @@ import (
 func ParseArgs(args []string) model.ParsedArgs {
 	parsed := model.ParsedArgs{
 		Command:   model.CmdNone,
-		MatchMode: "contains", //base value, else exact
+		MatchMode: model.Contains, //base value, else exact
 	}
 
 	var unknownArgs []string
@@ -42,12 +42,15 @@ func ParseArgs(args []string) model.ParsedArgs {
 		case "-m", "--match":
 			if i+1 < len(args) {
 				mode := args[i+1]
-				if mode == "exact" || mode == "contains" || mode == "regex" {
-					parsed.MatchMode = mode
-					i++
-				} else {
-					parsed.Command = model.CmdHelp
+				switch mode {
+				case "exact":
+					parsed.MatchMode = model.Exact
+				case "contains":
+					parsed.MatchMode = model.Contains
+				case "regex":
+					parsed.MatchMode = model.Regex
 				}
+				i++
 			}
 		case "-l", "--list-indexes":
 			parsed.Command = model.CmdShowIndex

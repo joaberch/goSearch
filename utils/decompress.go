@@ -8,8 +8,8 @@ import (
 	"strings"
 )
 
-func Decompress(zipPath string) string {
-	zipFile, err := os.Open(zipPath)
+func Decompress(gzPath string) string {
+	zipFile, err := os.Open(gzPath)
 	if err != nil {
 		log.Fatal(err)
 	}
@@ -31,7 +31,7 @@ func Decompress(zipPath string) string {
 		}
 	}()
 
-	indexPath := strings.TrimSuffix(zipPath, ".gz")
+	indexPath := strings.TrimSuffix(gzPath, ".gz")
 
 	indexFile, err := os.Create(indexPath)
 	if err != nil {

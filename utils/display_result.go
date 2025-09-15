@@ -7,9 +7,9 @@ import (
 
 // DisplayResult prints the list of file paths where the word was found.
 func DisplayResult(results map[string][]int, word string) {
-	fmt.Printf("\nFound %d file(s) for \"%s\":\n", len(results), word)
+	fmt.Printf("\nFound %d file(s) for %q:\n", len(results), word)
 
-	var sorted []string
+	sorted := make([]string, 0, len(results))
 	for path := range results {
 		sorted = append(sorted, path)
 	}

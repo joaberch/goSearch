@@ -2,13 +2,14 @@ package cmd
 
 import (
 	"fmt"
+	"github.com/joaberch/goSearch/internal/model"
 	"github.com/joaberch/goSearch/utils"
 	"log"
 	"os"
 )
 
 // Search performs a word lookup in the inverted index of the current directory
-func Search(word string, mode string) {
+func Search(word string, mode model.MatchMode) {
 	path, err := os.Getwd()
 	if err != nil {
 		log.Fatal(err)
