@@ -42,7 +42,7 @@ func ParseArgs(args []string) model.ParsedArgs {
 		case "-m", "--match":
 			if i+1 < len(args) {
 				mode := args[i+1]
-				if mode == "exact" || mode == "contains" {
+				if mode == "exact" || mode == "contains" || mode == "regex" {
 					parsed.MatchMode = mode
 					i++
 				} else {
