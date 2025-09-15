@@ -100,8 +100,8 @@ Found 2 file(s) for "hello":
 - [x] XML index saving/loading
 - [x] Compressing index 
 - [ ] Stemming and lemmatization in Normalization  
-- [ ] Regex search  
-- [ ] Line number
+- [x] Regex search  
+- [x] Line number
 - [x] Cross-platform support (for Linux and macOS)
 
 ---
