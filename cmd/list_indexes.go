@@ -16,12 +16,13 @@ import (
 // The function exits the program via log.Fatal if it cannot determine the home
 // directory or cannot retrieve metadata for an entry.
 func ListIndexes() {
-	homedir, err := os.UserHomeDir()
+	exePath, err := os.Executable()
 	if err != nil {
 		log.Fatal(err)
 	}
-
-	indexPath := filepath.Join(homedir, "Desktop", "utils", "index")
+	exeDir := filepath.Dir(exePath)
+	indexPath := filepath.Join(exeDir, "index") //output path
+	
 	entries, err := os.ReadDir(indexPath)
 	if err != nil {
 		fmt.Println("No index folder found")
