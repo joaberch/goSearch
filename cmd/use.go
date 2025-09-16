@@ -9,7 +9,21 @@ import (
 	"path/filepath"
 )
 
-// SearchWithIndex searches for a word in a saved XML index file.
+// SearchWithIndex searches for word in a compressed XML index file and displays matching results.
+// 
+// It expects compressedIndexName without extension; the function appends ".xml.gz" and looks for the file
+// under the executable's directory at "index/<compressedIndexName>.xml.gz". If the compressed file is not
+// found, it prints a not-found message and returns. The function decompresses the archive to a temporary
+// XML file (which it removes before returning), loads the inverted index from that XML, performs the search
+// using the provided MatchMode, and prints the results.
+//
+// Note: fatal errors (e.g., failing to determine the executable path, open the decompressed file, or clean up)
+// are logged with log.Fatal which terminates the process.
+//
+// Parameters:
+// - word: the search term.
+// - compressedIndexName: base name of the compressed index (extension is added automatically).
+// - mode: match mode that controls how terms are matched (exact, prefix, etc.).
 func SearchWithIndex(word string, compressedIndexName string, mode model.MatchMode) {
 	compressedIndexName += ".xml.gz"
 

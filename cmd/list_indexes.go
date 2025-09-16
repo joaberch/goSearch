@@ -7,6 +7,14 @@ import (
 	"path/filepath"
 )
 
+// ListIndexes prints saved index entries found in ~/Desktop/utils/index.
+// 
+// It looks up the current user's home directory, reads directory entries from
+// Desktop/utils/index and prints either guidance messages when the index folder
+// is missing or "No indexes found" when the folder is empty. For each entry it
+// prints the file name and its modification time (format: "2006-01-02 15:04:05").
+// The function exits the program via log.Fatal if it cannot determine the home
+// directory or cannot retrieve metadata for an entry.
 func ListIndexes() {
 	homedir, err := os.UserHomeDir()
 	if err != nil {

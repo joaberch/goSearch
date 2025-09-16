@@ -8,7 +8,7 @@ import (
 	"strings"
 )
 
-// StreamFile reads a file line by line, normalizes its content, and returns a FileData structure containing the extracted words.
+// set and an empty Content map. Scanner or close errors cause the process to terminate (log.Fatal).
 func StreamFile(element *model.TreeElement) model.FileData {
 	newFile := model.FileData{
 		Path:    element.Path,

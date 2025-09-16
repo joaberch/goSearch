@@ -9,7 +9,13 @@ import (
 	"strings"
 )
 
-// SaveIndex saves the inverted index into an XML file
+// SaveIndex saves the inverted index for the given path to a compressed XML file.
+// 
+// The function generates an inverted index for abs(path), writes it as an indented
+// XML file under "<exeDir>/index/<basename>.xml", compresses that file to
+// "<basename>.xml.gz", removes the uncompressed XML, and logs the final .gz path.
+// It creates the output directory if missing. Any error during these steps causes
+// immediate termination via log.Fatal.
 func SaveIndex(path string) {
 	exePath, err := os.Executable()
 	if err != nil {

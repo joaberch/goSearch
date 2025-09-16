@@ -2,6 +2,8 @@ package cmd
 
 import "fmt"
 
+// ShowHelp prints the command-line usage, commands, options, examples, and notes for the `gosearch` tool to standard output.
+// The message is static and formatted; the function performs no parsing and does not return an error.
 func ShowHelp() {
 	fmt.Println("Usage:")
 	fmt.Println("  gosearch [options] <search_term>")

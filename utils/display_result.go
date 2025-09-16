@@ -5,7 +5,15 @@ import (
 	"sort"
 )
 
-// DisplayResult prints the list of file paths where the word was found.
+// DisplayResult prints a summary of files that contain the given word.
+// 
+// It prints a header showing the number of files and the quoted search word, then
+// lists each file path sorted alphabetically. For each file, the associated line
+// numbers are deduplicated and sorted numerically before being displayed in the
+// form: "\t<path> (lines: [<line1> <line2> ...])".
+// 
+// results maps a file path to the slice of line numbers where the word was found.
+// word is the searched term shown in the header.
 func DisplayResult(results map[string][]int, word string) {
 	fmt.Printf("\nFound %d file(s) for %q:\n", len(results), word)
 
