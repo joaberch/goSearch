@@ -8,7 +8,23 @@ import (
 	"strings"
 )
 
-// set and an empty Content map. Scanner or close errors cause the process to terminate (log.Fatal).
+// StreamFile reads the content of the file specified by the given TreeElement
+// and returns it as a FileData object. Each line is processed by Normalize()
+// before being stored in the Content map, where keys represent line numbers
+// and values are the normalized line strings.
+//
+// Behavior:
+//   - If the file cannot be opened, an empty FileData is returned (with only Path set).
+//   - The scanner is configured with a maximum buffer capacity of 10 MB to handle long lines.
+//   - Any errors during scanning or closing the file cause the program to terminate via log.Fatal.
+//
+// Parameters:
+//
+//	element *model.TreeElement: A struct containing the path to the target file.
+//
+// Returns:
+//
+//	model.FileData: A struct containing the file path and a map of line numbers to normalized lines.
 func StreamFile(element *model.TreeElement) model.FileData {
 	newFile := model.FileData{
 		Path:    element.Path,
