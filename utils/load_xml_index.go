@@ -8,7 +8,11 @@ import (
 	"sort"
 )
 
-// LoadXMLIndex parses an XML index file and returns an InvertedIndex structure.
+// LoadXMLIndex parses the provided XML index file into a model.InvertedIndex.
+// It decodes an IndexDocument from file, converts each document entry into an
+// InvertedIndexEntry, sorts entries by the Word field (ascending), and returns
+// the resulting index. If XML decoding fails the function logs the error and
+// terminates the program via log.Fatal.
 func LoadXMLIndex(file *os.File) model.InvertedIndex {
 	var document model.IndexDocument
 	decoder := xml.NewDecoder(file)

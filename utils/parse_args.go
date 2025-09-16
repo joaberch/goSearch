@@ -6,6 +6,27 @@ import (
 	"os"
 )
 
+// ParseArgs converts a slice of command-line arguments into a model.ParsedArgs.
+// 
+// It recognizes the following flags:
+//   -h, --help            -> CmdHelp
+//   -v, --version         -> CmdVersion
+//   -u, --use <path>      -> CmdSearchWithIndex, sets IndexPath to <path>
+//   -s, --save [<path>]   -> CmdSave, sets SavePath to <path> or to the current working
+//                           directory if no path is provided
+//   -m, --match <mode>    -> sets MatchMode to one of: "exact" -> Exact,
+//                           "contains" -> Contains, "regex" -> Regex (default is Contains)
+//   -l, --list-indexes    -> CmdShowIndex
+//
+// Any unrecognized arguments are collected as unknown arguments; when no explicit
+// command is set and there is at least one unknown argument, the function sets
+// Command to CmdSearch and uses the first unknown argument as SearchArg. If the
+// command is CmdSearchWithIndex and unknown arguments exist, the first unknown
+// argument is used as SearchArg.
+//
+// Returns a fully populated model.ParsedArgs. Note: when -s/--save is provided
+// without a following path, the function calls os.Getwd and will terminate the
+// program via log.Fatal if getting the current directory fails.
 func ParseArgs(args []string) model.ParsedArgs {
 	parsed := model.ParsedArgs{
 		Command:   model.CmdNone,

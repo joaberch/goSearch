@@ -15,7 +15,18 @@ import (
 // 6 - Lemmatization
 
 // Normalize applies basic text preprocessing to a line: lowercasing, punctuation removal, and word filtering.
-// Future enhancement may include stemming and lemmatization.
+// Normalize lowercases, trims, strips punctuation/special characters, and returns
+// the list of valid words extracted from the input line.
+//
+// Normalize performs basic text preprocessing: it converts the input to lower
+// case, trims surrounding whitespace, removes characters that are not word
+// characters or whitespace, and splits the result on whitespace. Each token is
+// kept only if CheckWordValidity returns true. The function returns the slice
+// of filtered words in the same order they appeared in the input. If the
+// regular expression used for character removal fails to compile, the program
+// will terminate via log.Fatal.
+//
+// Future enhancements may include stemming and lemmatization.
 func Normalize(line string) []string {
 	line = strings.ToLower(line)
 	line = strings.TrimSpace(line)

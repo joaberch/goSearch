@@ -6,7 +6,26 @@ import (
 	"strings"
 )
 
-// CreateIndex builds an inverted index mapping each unique word to the list of files where it appears.
+// CreateIndex builds an inverted index that maps each unique token (whitespace-separated)
+// to the files and line numbers where it appears.
+//
+// The function tokenizes each line of each input file using strings.Fields (whitespace
+// separation only), records the line indices from FileData.Content where each token
+// occurs, removes duplicate line entries per file, and sorts line numbers in ascending
+// order. The returned InvertedIndex contains sorted entries by word; each entry lists
+// the files (by path) and the corresponding sorted, unique line indices.
+//
+// Parameters:
+//   - files: slice of FileData to index. Line numbers are the indices of FileData.Content
+//     (zero-based).
+//
+// Returns:
+//   - model.InvertedIndex containing one entry per token. If the input is empty, an
+//     empty InvertedIndex is returned.
+//
+// Notes:
+//   - Tokenization is whitespace-based only; punctuation is not stripped or normalized.
+//   - The function does not perform error handling or normalization (e.g., case folding).
 func CreateIndex(files []model.FileData) model.InvertedIndex {
 	tempIndex := make(map[string]map[string][]int) //Word string -> (file string -> lines []int)
 
