@@ -14,6 +14,7 @@ func ShowHelp() {
 	fmt.Println("  -v, --version          				Show version information")
 	fmt.Println("  -s, --save                			Save an index of the given folder (defaults to current directory if not specified)")
 	fmt.Println("  -u, --use                  			Use a specific saved index for search")
+	fmt.Println("  -l, --list-indexes					List available saved indexes.")
 	fmt.Println()
 
 	fmt.Println("Options:")

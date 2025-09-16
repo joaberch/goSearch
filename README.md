@@ -69,6 +69,10 @@ Saved to : ``~/Desktop/utils/index/<folder>.xml.gz``
 gosearch -u temp hello              # Search 'hello' in the index file 'temp.xml'
 gosearch hello -m exact -u temp     # Same with exact match mode
 ```
+### List available indexes
+```
+gosearch -l                         # Display the saved indexes available.
+```
 ### Output Example
 ```bash
 Found 2 file(s) for "hello":
