@@ -13,11 +13,12 @@ import (
 func SearchWithIndex(word string, compressedIndexName string, mode model.MatchMode) {
 	compressedIndexName += ".xml.gz"
 
-	homedir, err := os.UserHomeDir()
+	exePath, err := os.Executable()
 	if err != nil {
 		log.Fatal(err)
 	}
-	compressedIndexPath := filepath.Join(homedir, "Desktop", "utils", "index", compressedIndexName)
+	exeDir := filepath.Dir(exePath)
+	compressedIndexPath := filepath.Join(exeDir, "index", compressedIndexName) //output path
 	if _, err := os.Stat(compressedIndexPath); os.IsNotExist(err) {
 		fmt.Printf("Index \"%s\" not found at \"%s\"\n", compressedIndexName, compressedIndexPath)
 		return

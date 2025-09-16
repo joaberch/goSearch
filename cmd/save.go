@@ -11,11 +11,12 @@ import (
 
 // SaveIndex saves the inverted index into an XML file
 func SaveIndex(path string) {
-	baseDir, err := os.UserConfigDir()
+	exePath, err := os.Executable()
 	if err != nil {
 		log.Fatal(err)
 	}
-	indexPath := filepath.Join(baseDir, "Desktop", "utils", "index") //output path
+	exeDir := filepath.Dir(exePath)
+	indexPath := filepath.Join(exeDir, "index") //output path
 	if _, err = os.Stat(indexPath); os.IsNotExist(err) {
 		err = os.MkdirAll(indexPath, os.ModePerm)
 		if err != nil {
