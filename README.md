@@ -86,6 +86,7 @@ Found 2 file(s) for "hello":
 |------------|-------------------------------|-------------------------|---------------------|
 | *contains* | Default. Matches partial words | gosearch banan          | 'banane' & 'banana' |
 | *exact*    | Matches whole words only      | gosearch -m exact banan | 'banan' only          |
+| *regex*    | Matches using regular expr.   | gosearch -m regex ba(na)+ | 'banana', 'bananaa' |
 
 
 ---
