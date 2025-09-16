@@ -54,10 +54,6 @@ func SaveIndex(path string) {
 		log.Fatal(err)
 	}
 
-	err = file.Close()
-	if err != nil {
-		log.Fatal(err)
-	}
 	utils.CompressFile(indexFile)
 
 	err = file.Close()
