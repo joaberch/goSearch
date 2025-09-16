@@ -3,7 +3,6 @@ package utils
 import (
 	"github.com/joaberch/goSearch/internal/model"
 	"sort"
-	"strings"
 )
 
 // CreateIndex builds an inverted index that maps each unique token (whitespace-separated)
@@ -33,7 +32,7 @@ func CreateIndex(files []model.FileData) model.InvertedIndex {
 	//If 2 entries have the same word it won't be the same entry because ["word"]["file1"]=[lines] and ["word"]["file2"]=[lines]
 	for _, file := range files { //Foreach FileData
 		for lineNumber, line := range file.Content { //Foreach content
-			tokens := strings.Fields(line)
+			tokens := Normalize(line)
 
 			for _, token := range tokens { //Foreach word
 				if tempIndex[token] == nil { //If the word has never been processed, init the map

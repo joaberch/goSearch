@@ -29,6 +29,6 @@ var ExtensionsAllowed = map[string]bool{
 	".pptx":   false,
 	".xlsx":   false,
 	".xls":    false,
-	".LOG1":   false,
-	".LOG2":   false,
+	".log1":   false,
+	".log2":   false,
 }
