@@ -2,6 +2,8 @@ package cmd
 
 import "fmt"
 
+// ShowHelp prints the command-line usage, commands, options, examples, and notes for the `gosearch` tool to standard output.
+// The message is static and formatted; the function performs no parsing and does not return an error.
 func ShowHelp() {
 	fmt.Println("Usage:")
 	fmt.Println("  gosearch [options] <search_term>")
@@ -10,12 +12,13 @@ func ShowHelp() {
 	fmt.Println("Commands:")
 	fmt.Println("  -h, --help                			Show this help message")
 	fmt.Println("  -v, --version          				Show version information")
-	fmt.Println("  -s, --save                			Save an index of given folder")
+	fmt.Println("  -s, --save                			Save an index of the given folder (defaults to current directory if not specified)")
 	fmt.Println("  -u, --use                  			Use a specific saved index for search")
+	fmt.Println("  -l, --list-indexes					List available saved indexes.")
 	fmt.Println()
 
 	fmt.Println("Options:")
-	fmt.Println("  -m, --match <mode>					Set match mode: 'contains' (default) or 'exact'")
+	fmt.Println("  -m, --match <mode>					Set match mode: 'contains' (default), 'exact' or 'regex'")
 
 	fmt.Println("Examples:")
 	fmt.Println("  gosearch hello                       Search for 'hello' in current directory")

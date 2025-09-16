@@ -8,10 +8,27 @@ import (
 	"strings"
 )
 
-// StreamFile reads a file line by line, normalizes its content, and returns a FileData structure containing the extracted words.
+// StreamFile reads the content of the file specified by the given TreeElement
+// and returns it as a FileData object. Each line is processed by Normalize()
+// before being stored in the Content map, where keys represent line numbers
+// and values are the normalized line strings.
+//
+// Behavior:
+//   - If the file cannot be opened, an empty FileData is returned (with only Path set).
+//   - The scanner is configured with a maximum buffer capacity of 10 MB to handle long lines.
+//   - Any errors during scanning or closing the file cause the program to terminate via log.Fatal.
+//
+// Parameters:
+//
+//	element *model.TreeElement: A struct containing the path to the target file.
+//
+// Returns:
+//
+//	model.FileData: A struct containing the file path and a map of line numbers to normalized lines.
 func StreamFile(element *model.TreeElement) model.FileData {
 	newFile := model.FileData{
-		Path: element.Path,
+		Path:    element.Path,
+		Content: make(map[int]string),
 	}
 
 	file, err := os.Open(newFile.Path)
@@ -20,7 +37,7 @@ func StreamFile(element *model.TreeElement) model.FileData {
 		return newFile
 	}
 	defer func() {
-		err := file.Close()
+		err = file.Close()
 		if err != nil {
 			log.Fatal(err)
 		}
@@ -31,19 +48,16 @@ func StreamFile(element *model.TreeElement) model.FileData {
 	buf := make([]byte, maxCapacity)
 	scanner.Buffer(buf, maxCapacity)
 
-	var contents []string
+	lineNumber := 1
 	for scanner.Scan() {
-		line := Normalize(scanner.Text()) //Normalize line
-		words := strings.Split(line, ";")
-		for _, word := range words {
-			contents = append(contents, strings.TrimSpace(word))
-		}
+		normalizedWords := Normalize(scanner.Text()) //Normalize line
+		newFile.Content[lineNumber] = strings.Join(normalizedWords, " ")
+		lineNumber++
 	}
 
 	if err = scanner.Err(); err != nil {
 		log.Fatal(err)
 	}
 
-	newFile.Content = contents
 	return newFile
 }

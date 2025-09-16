@@ -1,7 +1,7 @@
 package model
 
-// InvalidExtensions maps extension and their validity
-var InvalidExtensions = map[string]bool{
+// ExtensionsAllowed maps extension and their validity
+var ExtensionsAllowed = map[string]bool{
 	".bin":    false,
 	".exe":    false,
 	".dll":    false,
@@ -10,6 +10,7 @@ var InvalidExtensions = map[string]bool{
 	".mp3":    false,
 	".mp4":    false,
 	".zip":    false,
+	".gz":     false,
 	".ttf":    false,
 	".otf":    false,
 	".png":    false,
@@ -28,6 +29,6 @@ var InvalidExtensions = map[string]bool{
 	".pptx":   false,
 	".xlsx":   false,
 	".xls":    false,
-	".LOG1":   false,
-	".LOG2":   false,
+	".log1":   false,
+	".log2":   false,
 }

@@ -8,8 +8,11 @@ import (
 	"strings"
 )
 
-func Decompress(zipPath string) string {
-	zipFile, err := os.Open(zipPath)
+// Decompress decompresses the gzip file at gzPath and writes the decompressed data to a new file
+// whose path is gzPath with the ".gz" suffix removed. It returns the path of the decompressed file.
+// On any I/O or gzip errors the function calls log.Fatal, causing the program to exit.
+func Decompress(gzPath string) string {
+	zipFile, err := os.Open(gzPath)
 	if err != nil {
 		log.Fatal(err)
 	}
@@ -31,7 +34,7 @@ func Decompress(zipPath string) string {
 		}
 	}()
 
-	indexPath := strings.TrimSuffix(zipPath, ".gz")
+	indexPath := strings.TrimSuffix(gzPath, ".gz")
 
 	indexFile, err := os.Create(indexPath)
 	if err != nil {

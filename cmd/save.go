@@ -9,13 +9,20 @@ import (
 	"strings"
 )
 
-// SaveIndex saves the inverted index into an XML file
+// SaveIndex saves the inverted index for the given path to a compressed XML file.
+// 
+// The function generates an inverted index for abs(path), writes it as an indented
+// XML file under "<exeDir>/index/<basename>.xml", compresses that file to
+// "<basename>.xml.gz", removes the uncompressed XML, and logs the final .gz path.
+// It creates the output directory if missing. Any error during these steps causes
+// immediate termination via log.Fatal.
 func SaveIndex(path string) {
-	homedir, err := os.UserHomeDir()
+	exePath, err := os.Executable()
 	if err != nil {
 		log.Fatal(err)
 	}
-	indexPath := filepath.Join(homedir, "Desktop", "utils", "index") //output path
+	exeDir := filepath.Dir(exePath)
+	indexPath := filepath.Join(exeDir, "index") //output path
 	if _, err = os.Stat(indexPath); os.IsNotExist(err) {
 		err = os.MkdirAll(indexPath, os.ModePerm)
 		if err != nil {
@@ -33,9 +40,12 @@ func SaveIndex(path string) {
 	}
 	indexFile := filepath.Join(indexPath, filename)
 	file, err := os.Create(indexFile)
+	if err != nil {
+		log.Fatal(err)
+	}
 
-	index := utils.Indexate(path)
-	xmlIndex := utils.ConvertInvertedIndexToXML(index)
+	index := utils.Indexate(absPath)
+	xmlIndex := index.ToXMLDocument()
 
 	encoder := xml.NewEncoder(file)
 	encoder.Indent("", "\t")
